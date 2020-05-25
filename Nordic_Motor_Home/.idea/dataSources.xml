@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="demo/Hibernate" uuid="989924b7-4273-47d8-a7eb-fc83e3c0a047">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://den1.mysql1.gear.host:3306/technologydb?autorecconect=true&amp;useSSL=false</jdbc-url>
+    </data-source>
+  </component>
+</project>

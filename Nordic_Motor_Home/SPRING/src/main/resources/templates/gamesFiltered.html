@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Games Filter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <header>
+        <div id="header-wrapper">
+            <!-- SEARCH BAR -->
+            <h2>Search For A Game</h2>
+
+            <!--            The form -->
+    <!--        <form class="example" action="action_page.php">-->
+    <!--            <input type="text" placeholder="Search.." name="search">-->
+    <!--            <button type="submit"><i class="fa fa-search"></i></button>-->
+    <!--        </form>-->
+
+            <input id="txtSearch" type="text" name="keyword">
+        </div>
+
+    </header>
+
+
+    <main>
+        <div id="page-wrapper">
+            <br/>
+            <br/>
+            <h2>List of Games</h2>
+            <a href="@{'/create/'+${game.id}}">
+                <button class="btn-create">Add new</button>
+            </a>
+            <table>
+                <!--caption><h2>List Of Persons</h2></caption-->
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Genre</th>
+                    <th>Rating</th>
+                    <th>Mode</th>
+                    <th>Release Date</th>
+                    <th>Developer</th>
+                    <th>Publisher</th>
+                    <th>Engine</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="game: ${games}">
+                    <td th:text="${game.id}"/>
+                    <td th:text="${game.name}"/>
+                    <td th:text="${game.genre}"/>
+                    <td th:text="${game.rating}"/>
+                    <td th:text="${game.mode}"/>
+                    <td th:text="${game.releaseDate}"/>
+                    <td th:text="${game.developer}"/>
+                    <td th:text="${game.publisher}"/>
+                    <td th:text="${game.engine}"/>
+                    <td>
+                        <a th:href="@{'/delete/'+${game.id}}">
+                            <button class="btn-delete"><i class="fa fa-trash"></i></button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/update/'+${game.id}}">
+                            <button class="btn-update"><i class="fa fa-edit"></i></button>
+                        </a>
+                    </td>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+
+    <buttom>
+        <div id="buttom-wrapper">
+        </div>
+    </buttom>
+
+    <script th:inline="javascript">
+
+        $('#txtSearch').on('keyup', function(){
+            const value = $(this).val();
+            console.log('Value = ' + value);
+        });
+    </script>
+
+</body>
+</html>
