@@ -532,96 +532,96 @@
     <!-- view bootstrap modal -->
     <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="viewModalLabel">View Contract</h5>
+                <div class="viewModal-content">
+                    <div class="viewModal-header">
+                        <h5 class="viewModal-title" id="viewModalLabel">View Contract</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="viewModal-body">
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">ID:</label>
-                            <input type="text" class="form-control" id="idView" name="id" readonly>
+                            <input type="text" class="viewForm-control" id="idView" name="id" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Customer ID:</label>
-                            <input type="text" class="form-control" id="customerIdView" name="customerId" readonly>
+                            <input type="text" class="viewForm-control" id="customerIdView" name="customerId" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Motorhome ID:</label>
-                            <input type="text" class="form-control" id="motorhomeIdView" name="motorhomeId" readonly>
+                            <input type="text" class="viewForm-control" id="motorhomeIdView" name="motorhomeId" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Accessory ID:</label>
-                            <input type="text" class="form-control" id="accessoryIdView" name="accessoryId" readonly>
+                            <input type="text" class="viewForm-control" id="accessoryIdView" name="accessoryId" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Season:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control" id="seasonView" name="season" required>
+                                   oninput="this.setCustomValidity('')" class="viewForm-control" id="seasonView" name="season" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Start Date:</label>
-                            <input type="date" class="form-control" id="fromDateView" name="fromDate" required>
+                            <input type="date" class="viewForm-control" id="fromDateView" name="fromDate" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">End Date:</label>
-                            <input type="date" class="form-control" id="toDateView" name="toDate" required>
+                            <input type="date" class="viewForm-control" id="toDateView" name="toDate" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Fuel:</label>
-                            <input type="number" class="form-control"  id="fuelView" name="fuel" required>
+                            <input type="number" class="viewForm-control"  id="fuelView" name="fuel" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Extra Kilometers:</label>
-                            <input type="number" class="form-control"  id="extraKmView" name="extraKm" required>
+                            <input type="number" class="viewForm-control"  id="extraKmView" name="extraKm" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Pick up location:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control"  id="pickUpLocationView" name="pickUpLocation" required>
+                                   oninput="this.setCustomValidity('')" class="viewForm-control"  id="pickUpLocationView" name="pickUpLocation" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Drop off location:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control"  id="dropOffLocationView" name="dropOffLocation" required>
+                                   oninput="this.setCustomValidity('')" class="viewForm-control"  id="dropOffLocationView" name="dropOffLocation" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Rental price:</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control"  id="rentalPriceView" name="rentalPrice" required>
+                            <input type="number" step="0.01" min="0.00" class="viewForm-control"  id="rentalPriceView" name="rentalPrice" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Post rental price:</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control"  id="postRentalPriceView" name="postRentalPrice" required>
+                            <input type="number" step="0.01" min="0.00" class="viewForm-control"  id="postRentalPriceView" name="postRentalPrice" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Total Price:</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control"  id="totalPriceView" name="totalPrice" required>
+                            <input type="number" step="0.01" min="0.00" class="viewForm-control"  id="totalPriceView" name="totalPrice" readonly>
                         </div>
 
-                        <div class="form-group">
+                        <div class="viewForm-group">
                             <label for="recipient-name" class="col-form-label">Status:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control"  id="statusView" name="status" required>
+                                   oninput="this.setCustomValidity('')" class="viewForm-control"  id="statusView" name="status" readonly>
                         </div>
 
                     </div>
-                    <div class="modal-footer">
+                    <div class="viewModal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
