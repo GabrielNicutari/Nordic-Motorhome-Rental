@@ -22,10 +22,11 @@ public class RentalContract {
     private double postRentalPrice;
     private double totalPrice;
     private String status;
+    private String plate;
 
     public RentalContract() {}
 
-    public RentalContract(int id, int customerId, int motorHomeId, String season, String fromDate, String toDate, String fuel, double extraKm, int pickUpLocation, int dropOffLocation, double rentalPrice, double postRentalPrice, double totalPrice, String status) {
+    public RentalContract(int id, int customerId, int motorHomeId, String season, String fromDate, String toDate, String fuel, double extraKm, int pickUpLocation, int dropOffLocation, double rentalPrice, double postRentalPrice, double totalPrice, String status, String plate) {
         this.id = id;
         this.customerId = customerId;
         this.motorhomeId = motorhomeId;
@@ -41,6 +42,7 @@ public class RentalContract {
         this.postRentalPrice = postRentalPrice;
         this.totalPrice = totalPrice;
         this.status = status;
+        this.plate = plate;
     }
 
     public int getId() {
@@ -161,5 +163,13 @@ public class RentalContract {
 
     public void setAccessoryId(int accessoryId) {
         this.accessoryId = accessoryId;
+    }
+
+    public String getPlate() {
+        return plate;
+    }
+
+    public void setPlate(String plate) {
+        this.plate = plate;
     }
 }

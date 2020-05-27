@@ -159,13 +159,52 @@ td, th, tr {
     display: inline-block;
     border: 2px solid #e05555;
     border-left: 1px!important;
+    width: 100%;
+    overflow: hidden;
+}
+
+.btn-delete::before{
+    background: #e05555;
+    color: white;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    transition: transform 0.5s;
+    transform-origin: 0 0;
+    transition-timing-function: cubic-bezier(0.5,1.6,0.4,0.7);
+    transform: scaleX(0);
+}
+
+.btn-delete:hover::before{
+    transform: scaleX(1.02);
+}
+
+.fa-trash {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-view {
+    background: #2F4F4F;
+    color: white!important;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    border: 2px solid #e05555;
+    border-left: 1px!important;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     width: 100%;
     overflow: hidden;
 }
 
-.btn-delete::before{
+.btn-view::before{
     background: #e05555;
     color: white;
     content: "";
@@ -183,11 +222,11 @@ td, th, tr {
     transform: scaleX(0);
 }
 
-.btn-delete:hover::before{
+.btn-view:hover::before{
     transform: scaleX(1.02);
 }
 
-.fa-trash {
+.fa-eye {
     position: relative;
     z-index: 1;
 }

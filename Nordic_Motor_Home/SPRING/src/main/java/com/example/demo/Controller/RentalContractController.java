@@ -62,4 +62,5 @@ public class RentalContractController {
         rentalContractService.update(rentalContract, rentalContract.getId());
         return "redirect:/rentalContracts";
     }
+
 }
