@@ -30,7 +30,18 @@ $('document').ready(function() {
                 $('#availabilityEdit').val(motorhome.availability);
             });
 
+            $.get(href, function(customer, status) {
+                $('#idEdit').val(customer.id);
+                $('#firstNameEdit').val(customer.firstName);
+                $('#lastNameEdit').val(customer.lastName);
+                $('#addressEdit').val(customer.address);
+                $('#phoneNumberEdit').val(customer.phoneNumber);
+                $('#emailEdit').val(customer.email);
+                $('#driverLicenceNumberEdit').val(customer.driverLicenceNumber);
+                $('#driverSinceDateEdit').val(customer.driverSinceDate);
+            });
+
             $('#editModal').modal();
         });
-
 });
+
