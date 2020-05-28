@@ -46,6 +46,17 @@ $('document').ready(function() {
             $('#postRentalPriceEdit').val(rentalcontract.postRentalPrice);
             $('#totalPriceEdit').val(rentalcontract.totalPrice);
             $('#statusEdit').val(rentalcontract.status);
+          
+         $.get(href, function(customer, status) {
+                $('#idEdit').val(customer.id);
+                $('#firstNameEdit').val(customer.firstName);
+                $('#lastNameEdit').val(customer.lastName);
+                $('#addressEdit').val(customer.address);
+                $('#phoneNumberEdit').val(customer.phoneNumber);
+                $('#emailEdit').val(customer.email);
+                $('#driverLicenceNumberEdit').val(customer.driverLicenceNumber);
+                $('#driverSinceDateEdit').val(customer.driverSinceDate);
+            });
         });
 
         $('#editModal').modal();
@@ -68,7 +79,9 @@ $('document').ready(function() {
             $('#pricePerDayEdit').val(motorhome.pricePerDay);
             $('#availabilityEdit').val(motorhome.availability);
         });
-
+            $('#editModal').modal();
+     });
+  
         $.get(href, function(rentalcontract, status) {
             $('#idView').val(rentalcontract.id);
             $('#customerIdView').val(rentalcontract.customerId);
@@ -89,5 +102,5 @@ $('document').ready(function() {
 
         $('#viewModal').modal();
     });
-
 });
+
