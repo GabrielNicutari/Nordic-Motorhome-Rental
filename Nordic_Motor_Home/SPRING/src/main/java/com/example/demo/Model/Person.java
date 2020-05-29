@@ -2,31 +2,21 @@ package com.example.demo.Model;
 
 public class Person {
 
-    public int id;
-    public String firstName;
-    public String lastName;
-    public String address;
-    public String phoneNumber;
-    public String email;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String phoneNumber;
+    private String email;
 
     public Person() { }
 
-    public Person(int id, String firstName, String lastName, String address, String phoneNumber, String email) {
-        this.id = id;
+    public Person(String firstName, String lastName, String address, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
