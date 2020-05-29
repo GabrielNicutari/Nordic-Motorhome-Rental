@@ -16,7 +16,9 @@ public class MotorhomeRepository {
     JdbcTemplate template;
 
     public List<Motorhome> fetchAll() {
-        String query = "SELECT * FROM motorhomes";
+        String query = "SELECT mh.id, b.brand, m.model, m.budget, m.size, m.fuelType, mh.hp, mh.plate, mh.seatNumber, " +
+                " mh.seatNumber, mh.seatsMaterial, mh.cruiseControl, mh.pricePerDay, mh.availability FROM motorhomes mh, models m, brands b " +
+                "WHERE mh.modelId = m.id AND m.brandId = b.id";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(query, rowMapper);
     }

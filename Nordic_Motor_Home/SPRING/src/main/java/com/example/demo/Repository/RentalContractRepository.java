@@ -16,7 +16,7 @@ public class RentalContractRepository {
     JdbcTemplate template;
 
     public List<RentalContract> fetchAll() {
-        String query = "SELECT rentalcontracts.*, motorhomes.plate FROM rentalcontracts, motorhomes";
+        String query = "SELECT rentalcontracts.*, motorhomes.plate FROM rentalcontracts, motorhomes WHERE rentalcontracts.motorHomeId = motorhomes.id";
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         return template.query(query, rowMapper);
     }

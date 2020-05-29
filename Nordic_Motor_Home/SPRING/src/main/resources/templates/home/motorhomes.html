@@ -64,7 +64,11 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Model ID</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Budget</th>
+                        <th>Size</th>
+                        <th>Fuel Type</th>
                         <th>HP</th>
                         <th>Plate</th>
                         <th>Seat Number</th>
@@ -79,7 +83,11 @@
                 <tbody>
                     <tr th:each="motorhome: ${motorhomes}">
                         <td th:text="${motorhome.id}"/>
-                        <td th:text="${motorhome.modelId}"/>
+                        <td th:text="${motorhome.brand}"/>
+                        <td th:text="${motorhome.model}"/>
+                        <td th:text="${motorhome.budget}"/>
+                        <td th:text="${motorhome.size}"/>
+                        <td th:text="${motorhome.fuelType}"/>
                         <td th:text="${motorhome.hp}"/>
                         <td th:text="${motorhome.plate}"/>
                         <td th:text="${motorhome.seatNumber}"/>
