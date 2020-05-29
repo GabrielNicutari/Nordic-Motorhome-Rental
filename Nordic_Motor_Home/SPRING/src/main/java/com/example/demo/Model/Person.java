@@ -1,0 +1,46 @@
+package com.example.demo.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+
+public abstract class Person {
+
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String phoneNumber;
+    private String email;
+
+    public Person() { }
+
+    public Person(String firstName, String lastName, String address, String phoneNumber, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+}

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Nordic Motorhome</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/qqq4rfx.css">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/main.js" th:src="@{/main.js}"></script>
+</head>
+<body>
+
+<header>
+    <a href="/employees">
+        <img  class="logo" src="logo2.png" alt="logo">
+    </a>
+
+    <h1 class = "title">NMH</h1>
+
+
+    <form class="search-box" th:action="@{/employees}" method="get">
+        <a href="#">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </a>
+        <input class ="search-txt" type="text" name="keyword" placeholder="Type to search">
+    </form>
+
+
+    <div id="header-wrapper">
+    </div>
+
+</header>
+
+
+
+<main>
+    <div id="page-wrapper">
+
+        <a th:action="@{/employees/add}" method="post">
+            <div align="right" >
+                <button type="button" class="btn-add" data-toggle="modal" data-target="#addModal" ><span class="add-txt">Add Employee</span></button>
+            </div>
+        </a>
+
+        <table id="employeesTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>ZIP</th>
+                <th>City</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>CPR</th>
+                <th>Role</th>
+                <th>Hours/Week</th>
+                <th>Wage</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="employee: ${employees}">
+                <td th:text="${employee.id}"/>
+                <td th:text="${employee.firstName}"/>
+                <td th:text="${employee.lastName}"/>
+                <td th:text="${employee.address}"/>
+                <td th:text="${employee.zipCodeEmployee}"/>
+                <td th:text="${employee.city}"/>
+                <td th:text="${employee.phoneNumber}"/>
+                <td th:text="${employee.email}"/>
+                <td th:text="${employee.cpr}"/>
+                <td th:text="${employee.role}"/>
+                <td th:text="${employee.hoursPerWeek}"/>
+                <td th:text="${employee.wage}"/>
+                <td>
+                    <div class="btn-group">
+                        <a th:href="@{/employees/getOne/(id=${employee.id})}" class="btn-update editButton"><i class="fa fa-edit"></i></a>
+                        <a th:href="@{/employees/delete/(id=${employee.id})}" class="btn-delete deleteButton"><i class ="fa fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+
+<buttom>
+    <div id="buttom-wrapper">
+    </div>
+</buttom>
+
+
+
+<!--    <script src="js/jquery.scrollTo.min.js"></script>-->
+<!--    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>-->
+<!--    -->
+<!--    <script src="js/scripts.js"></script>-->
+<!--    <script src="js/employee.js"></script>-->
+
+<!--<script th:inline="javascript">-->
+
+<!--    /*<![CDATA[*/-->
+<!--    let employees = [[${employees}]];-->
+<!--    /*]]>*/-->
+
+<!--    $('#txtSearch').on('keyup', function(){-->
+
+<!--        let value = $(this).val();-->
+
+<!--        //Get filtered employees list-->
+<!--        let data = FilterFunction(value, employees)-->
+
+<!--        //Clear the table and rebuild using new filtered data-->
+<!--        rebuildTable(data)-->
+
+<!--    });-->
+
+<!--    function FilterFunction(value, data) {-->
+<!--        let filteredData = [];-->
+<!--        for(let i = 0; i < data.length; i++) {-->
+<!--            value = value.toLowerCase();-->
+<!--            let firstName = data[i].firstName.toLowerCase();-->
+<!--            let lastName = data[i].lastName.toLowerCase();-->
+
+<!--            if(firstName.includes(value) || lastName.includes(value)) {-->
+<!--                filteredData.push(data[i]);-->
+<!--            }-->
+<!--        }-->
+<!--        return filteredData;-->
+<!--    }-->
+
+<!--    function  rebuildTable(data) {-->
+<!--        let table = document.getElementById('employeesTable')-->
+<!--        table.innerHTML=''-->
+
+<!--        let header = `<thead>-->
+<!--                     <tr>-->
+<!--                        <th>ID</th>-->
+<!--                        <th>First Name</th>-->
+<!--                        <th>Last Name</th>-->
+<!--                        <th>Address</th>-->
+<!--                        <th>ZIP</th>-->
+<!--                        <th>City</th>-->
+<!--                        <th>CPR</th>-->
+<!--                        <th>Role</th>-->
+<!--                        <th>Wage</th>-->
+<!--                        <th>Hours/Week</th>-->
+<!--                        <th>Phone Number</th>-->
+<!--                        <th>Email</th>-->
+<!--                    </tr>-->
+<!--                </thead>`-->
+
+<!--        table.innerHTML += header;-->
+
+
+<!--        for(let i = 0; i < data.length; i++) {-->
+<!--            let row = `<tr>-->
+<!--                        <td>${data[i].firstName}</td>-->
+<!--                        <td>${data[i].lastName}</td>-->
+<!--                        <td>${data[i].address}</td>-->
+<!--                        <td>${data[i].zip}</td>-->
+<!--                        <td>${data[i].city}</td>-->
+<!--                        <td>${data[i].cpr}</td>-->
+<!--                        <td>${data[i].role}</td>-->
+<!--                        <td>${data[i].wage}</td>-->
+<!--                        <td>${data[i].hoursPerWeek}</td>-->
+<!--                        <td>${data[i].email}</td>-->
+<!--                        <td>-->
+<!--                            <div class="btn-group">-->
+<!--                                <a href="/employees/delete/?id=${data[i].id}" class="btn-delete deleteButton"><i class ="fa fa-trash"></i></a>-->
+<!--&lt;!&ndash;                                <a href="" class="btn-delete deleteButton"><i class ="fa fa-trash"></i></a>&ndash;&gt;-->
+<!--                                <a th:href="@{/employees/update/(id=${employee.id})}" class="btn-update editButton"><i class ="fa fa-edit"></i></a>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>`-->
+
+<!--            table.innerHTML += row;-->
+<!--        }-->
+<!--    }-->
+
+<!--</script>-->
+
+<!-- add bootstrap modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/employees/add}" method="post">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <!--div class="form-group">
+                        <label for="recipient-id" class="col-form-label">Id:</label>
+                        <input type="text" class="form-control" id="recipient-id" name="id">
+                    </div-->
+
+                    <div class="form-group">
+                        <label for="recipient-firstName" class="col-form-label">First Name:</label>
+                        <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="form-control" id="recipient-firstName" name="firstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-lastName" class="col-form-label">Last Name:</label>
+                        <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="form-control" id="recipient-lastName" name="lastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-address" class="col-form-label">Address:</label>
+                        <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="form-control" id="recipient-address" name="address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-phone" class="col-form-label">Phone Number:</label>
+                        <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="form-control" id="recipient-phone" name="phoneNumber" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="recipient-email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-driverLicenceNo" class="col-form-label">Driver Licence Number:</label>
+                        <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="form-control" id="recipient-driverLicenceNo" name="driverLicenceNumber" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-driverSinceDate" class="col-form-label">Driver since Date:</label>
+                        <input type="date" class="form-control" id="recipient-driverSinceDate" name="driverSinceDate" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- edit bootstrap modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <form th:action="@{/employees/update}" method="put">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="col-form-label">Id:</label>
+                        <input type="number" class="form-control" id="idEdit" name="id" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="col-form-label">First Name:</label>
+                        <input type="text"  class="form-control" id="firstNameEdit" name="firstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="col-form-label">Last Name:</label>
+                        <input type="text" class="form-control" id="lastNameEdit" name="lastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Address:</label>
+                        <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="form-control" id="addressEdit" name="address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Phone Number:</label>
+                        <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="form-control"  id="phoneNumberEdit" name="phoneNumber" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Email:</label>
+                        <input type="email" class="form-control"  id="emailEdit" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Driver Licence Number:</label>
+                        <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                               oninput="this.setCustomValidity('')" class="form-control"  id="driverLicenceNumberEdit" name="driverLicenceNumber" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Driver since Date:</label>
+                        <input type="date" class="form-control"  id="driverSinceDateEdit" name="driverSinceDate" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Modify</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- delete bootstrap modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this row?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-danger" id="delRef">Yes, Delete</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
