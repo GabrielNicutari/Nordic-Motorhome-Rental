@@ -26,14 +26,22 @@ public class CustomerRepository {
     }
 
     public void add(Customer c) {
-        String query1 = "INSERT INTO zip(zipCode, city) VALUES (?, ?)";
+        if(!doesZipExist(c.getZipCodeCustomer())) {
+            String query1 = "INSERT INTO zip (zipCode, city)" +
+                    "VALUES (?, ?)";
+            template.update(query1, c.getZipCodeCustomer(), c.getCity());
+        }
         String query2 = "INSERT INTO customers (id, firstName, lastName, address, zipCodeCustomer, phoneNumber, email, " +
                 "driverSinceDate, driverLicenceNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        template.update(query1, c.getZipCodeCustomer(), c.getCity());
         template.update(query2, c.getId(), c.getFirstName(), c.getLastName(), c.getAddress(), c.getZipCodeCustomer(),
                 c.getPhoneNumber(), c.getEmail(),
                 c.getDriverSinceDate(), c.getDriverLicenceNumber());
+    }
+
+    //@Autowired private JdbcTemplate jdbcTemplate;
+    private boolean doesZipExist(String newZip) { // checks if the zip already exists in the zip table
+        return template.queryForObject("SELECT EXISTS(SELECT zipCode FROM zip " +
+                "WHERE zipCode = \"" + newZip + "\")", Boolean.class);
     }
 
     public Boolean deleteRow(int id) {
@@ -42,8 +50,9 @@ public class CustomerRepository {
         return template.update(query, id) < 0;
     }
 
-    public List<Customer> findByKeyWord(String keyword) {  //only name now
-        String query = "SELECT * FROM customers WHERE firstName LIKE '%" + keyword + "%'";
+    public List<Customer> findByKeyWord(String keyword) {
+        String query = "SELECT * FROM customers WHERE firstName LIKE '%" + keyword + "%' " +
+                "OR lastName LIKE '%" + keyword + "%' OR phoneNumber LIKE '%" + keyword + "%'";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
 
         return template.query(query, rowMapper);
