@@ -23,4 +23,24 @@ public class EmployeeService {
         return employeeRepository.findByKeyWord(keyword);
     }
 
+
+    public void add(Employee employee) {
+        employeeRepository.add(employee);
+    }
+
+
+    public void update(Employee employee, int id) {
+        employeeRepository.update(employee, id);
+    }
+
+    public Employee getOne(int id) {
+        return employeeRepository.findById(id);
+    }
+
+
+    public void deleteRow(int id) {
+        employeeRepository.deleteRow(id);
+    }
+
+
 }

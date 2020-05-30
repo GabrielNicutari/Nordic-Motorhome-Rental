@@ -79,6 +79,34 @@ public class Employee extends Person {
     }
 
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setZipCodeEmployee(String zipCodeEmployee) {
+        this.zipCodeEmployee = zipCodeEmployee;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setCpr(String cpr) {
+        this.cpr = cpr;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setHoursPerWeek(int hoursPerWeek) {
+        this.hoursPerWeek = hoursPerWeek;
+    }
+
+    public void setWage(double wage) {
+        this.wage = wage;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
