@@ -7,7 +7,7 @@ public class Motorhome {
 
     @Id
     private int id;
-    private int modelId;
+    //private int modelId;      //we might not use this anymore, only in the tables (FK)
     private int hp;
     private String plate;
     private int seatNumber;
@@ -29,7 +29,7 @@ public class Motorhome {
                      double pricePerDay, String availability, String brand, String model, String budget, String size,
                      String fuelType) {
         this.id = id;
-        this.modelId = modelId;
+        //this.modelId = modelId;
         this.hp = hp;
         this.plate = plate;
         this.seatNumber = seatNumber;
@@ -53,9 +53,9 @@ public class Motorhome {
         this.id = id;
     }
 
-    public int getModelId() {
-        return modelId;
-    }
+//    public int getModelId() {
+//        return modelId;
+//    }
 
     public String getBrand() {
         return brand;
@@ -97,9 +97,9 @@ public class Motorhome {
         this.fuelType = fuelType;
     }
 
-    public void setModelId(int modelId) {
-        this.modelId = modelId;
-    }
+//    public void setModelId(int modelId) {
+//        this.modelId = modelId;
+//    }
 
     public int getHp() {
         return hp;

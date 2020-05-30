@@ -1,5 +1,7 @@
 package com.example.demo.Service;
 
+import com.example.demo.Model.Brand;
+import com.example.demo.Model.Model;
 import com.example.demo.Model.Motorhome;
 import com.example.demo.Repository.MotorhomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +15,16 @@ public class MotorhomeService {
     @Autowired
     private MotorhomeRepository motorhomeRepository;
 
-    //List<Person> persons = new ArrayList<>();
-
     public List<Motorhome> fetchAll() {
-        //personRepository.fetchAll().forEach(persons::add);  //Get everything from the db and add it into an arraylist
         return motorhomeRepository.fetchAll();
+    }
+
+    public List<Brand> fetchBrands() {
+        return motorhomeRepository.fetchBrands();
+    }
+
+    public List<Model> fetchModels() {
+        return motorhomeRepository.fetchModels();
     }
   
     public void add(Motorhome g) {
@@ -32,12 +39,15 @@ public class MotorhomeService {
         return motorhomeRepository.deleteRow(id);
     }
 
-    public void update(Motorhome g, int id) {
-        motorhomeRepository.update(g, id);
-    }
+//    public void update(Motorhome g, int id) {
+//        motorhomeRepository.update(g, id);
+//    }
 
     //Get motorhomes by keyword
     public List<Motorhome> findByKeyWord(String keyword) {
         return motorhomeRepository.findByKeyWord(keyword);
     }
+
+
+
 }

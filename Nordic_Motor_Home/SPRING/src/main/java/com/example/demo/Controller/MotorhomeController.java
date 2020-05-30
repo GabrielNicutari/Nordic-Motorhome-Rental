@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Brand;
 import com.example.demo.Model.Motorhome;
 import com.example.demo.Service.MotorhomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,11 @@ public class MotorhomeController {
     @GetMapping("/motorhomes")
     public String motorhomes(Model model, String keyword) {
         List<Motorhome> motorhomeList = motorhomeService.fetchAll();
+        List<Brand> brandList = motorhomeService.fetchBrands();
+        List<com.example.demo.Model.Model> modelList = motorhomeService.fetchModels();
         model.addAttribute("motorhomes", motorhomeList);
+        model.addAttribute("brands",brandList);
+        model.addAttribute("models",modelList);
 
         if (keyword != null) {
             if(keyword.equals("")) {
@@ -58,9 +63,9 @@ public class MotorhomeController {
     }
 
     //UPDATE METHOD
-    @RequestMapping(value="/motorhomes/update", method = {RequestMethod.PUT, RequestMethod.GET})
-    public String update(@ModelAttribute Motorhome motorhome) {
-        motorhomeService.update(motorhome, motorhome.getId());
-        return "redirect:/motorhomes";
-    }
+//    @RequestMapping(value="/motorhomes/update", method = {RequestMethod.PUT, RequestMethod.GET})
+//    public String update(@ModelAttribute Motorhome motorhome) {
+//        motorhomeService.update(motorhome, motorhome.getId());
+//        return "redirect:/motorhomes";
+//    }
 }
