@@ -402,13 +402,15 @@ form.example button {
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
-    width: 100%;
-    pointer-events: auto;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0.3rem;
-    outline: 0;
+    background:#e1e1e1;
+    margin: 0 auto;
+    width: 1200px;
+    z-index:41;
+    top: 25%;
+    padding:30px;
+    -webkit-box-shadow:0 0 10px rgba(0,0,0,0.4);
+    -moz-box-shadow:0 0 10px rgba(0,0,0,0.4);
+    box-shadow:0 0 10px rgba(0,0,0,0.4);
 }
 
 .viewModal-backdrop {
@@ -440,6 +442,8 @@ form.example button {
     border-bottom: 1px solid #dee2e6;
     border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
+    background: red;
+    width: 100%;
 }
 
 .viewModal-header .close {
@@ -453,9 +457,9 @@ form.example button {
 }
 
 .viewModal-body {
-    position: relative;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
+    background: #FFFFFF;
+    /*-ms-flex: 1 1 auto;*/
+    /*flex: 1 1 auto;*/
     padding: 1rem;
 }
 
@@ -465,9 +469,11 @@ form.example button {
     -ms-flex-align: center;
     align-items: center;
     -ms-flex-pack: end;
+    background: green;
     justify-content: flex-end;
     padding: 1rem;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid 3;
+    width: 100%;
     border-bottom-right-radius: 0.3rem;
     border-bottom-left-radius: 0.3rem;
 }
@@ -492,12 +498,133 @@ form.example button {
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
-    background-color: #fff;
+    background-color: #FFFFFF;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
+    border: 1px solid black;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.viewForm-control-inline {
+    display: inline-block;
+    width: 60%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: lightgrey;
+    background-clip: text;
+    border: 1px solid #FFFFFF;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.car_icon {
+    height: 20px;
+    width: auto;
+}
+
+.viewModal-section_header {
+    margin-top: 10px;
+    background: #F8FFB5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.viewModal-section_header-title {
+    margin: 0 auto;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+
+.col-form-label-inline {
+    display: inline-block !important;
+    float: left;
+    width: 40%;
+    text-align: left !important;
+    vertical-align: middle !important;
+    padding-top: 2px;
+}
+
+.col-form-label-inline-payment {
+    display: inline-block !important;
+    float: left;
+    width: 40%;
+    text-align: left !important;
+    vertical-align: middle !important;
+    padding-top: 2px;
+}
+
+.col-form-label {
+    float: left;
+    text-align: left !important;
+}
+
+table#policyInformationTable {
+    table-layout: fixed ;
+    width: 100% ;
+    border-collapse: collapse ;
+}
+table#policyInformationTable td {
+    width: 33.3% ;
+    padding: 10px ;
+}
+
+table#generalInformationTable {
+    table-layout: fixed ;
+    width: 100% ;
+    border-collapse: collapse ;
+}
+table#generalInformationTable td {
+    width: 33.3% ;
+    padding: 10px ;
+}
+
+table#carInformationTable {
+    table-layout: fixed ;
+    width: 100% ;
+    border-collapse: collapse ;
+}
+table#carInformationTable td {
+    width: 33.3% ;
+    padding: 10px ;
+}
+
+table#paymentInformationTable {
+    table-layout: fixed ;
+    width: 100% ;
+    border-collapse: collapse ;
+}
+table#paymentInformationTable td {
+    width: 100% ;
+    padding: 10px ;
+}
+
+table#signaturesTable {
+    table-layout: fixed ;
+    width: 100% ;
+    border-collapse: collapse ;
+}
+table#signaturesTable td {
+    width: 50% ;
+    padding: 10px ;
+}
+
+.company-signature {
+    width: 70%;
+    border-bottom: 1px dotted black;
+}
+
+.costumer-signature {
+    width: 70%;
+    border-bottom: 1px dotted black;
+}
+
 
 
 
