@@ -20,7 +20,8 @@ $('document').ready(function() {
 
         $.get(href, function(motorhome, status) {
             $('#idEdit').val(motorhome.id);
-            $('#modelIdEdit').val(motorhome.modelId);
+            $('#brandEdit').val(motorhome.brand);
+            $('#modelEdit').val(motorhome.model);
             $('#hpEdit').val(motorhome.hp);
             $('#plateEdit').val(motorhome.plate);
             $('#seatNumberEdit').val(motorhome.seatNumber);
@@ -84,15 +85,15 @@ $('document').ready(function() {
         var href = $(this).attr('href');
 
         $.get(href, function(motorhome, status) {
-            $('#idEdit').val(motorhome.id);
-            $('#modelIdEdit').val(motorhome.modelId);
-            $('#hpEdit').val(motorhome.hp);
-            $('#plateEdit').val(motorhome.plate);
-            $('#seatNumberEdit').val(motorhome.seatNumber);
-            $('#seatsMaterialEdit').val(motorhome.seatsMaterial);
-            $('#cruiseControlEdit').val(motorhome.cruiseControl);
-            $('#pricePerDayEdit').val(motorhome.pricePerDay);
-            $('#availabilityEdit').val(motorhome.availability);
+            $('#idView').val(motorhome.id);
+            $('#modelView').val(motorhome.modelId);
+            $('#hpView').val(motorhome.hp);
+            $('#plateView').val(motorhome.plate);
+            $('#seatNumberView').val(motorhome.seatNumber);
+            $('#seatsMaterialView').val(motorhome.seatsMaterial);
+            $('#cruiseControlView').val(motorhome.cruiseControl);
+            $('#pricePerDayView').val(motorhome.pricePerDay);
+            $('#availabilityView').val(motorhome.availability);
         });
   
         $.get(href, function(rentalcontract, status) {
