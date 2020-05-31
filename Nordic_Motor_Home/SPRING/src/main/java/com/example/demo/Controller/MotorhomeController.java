@@ -62,10 +62,10 @@ public class MotorhomeController {
         return "redirect:/motorhomes";
     }
 
-    //UPDATE METHOD
-//    @RequestMapping(value="/motorhomes/update", method = {RequestMethod.PUT, RequestMethod.GET})
-//    public String update(@ModelAttribute Motorhome motorhome) {
-//        motorhomeService.update(motorhome, motorhome.getId());
-//        return "redirect:/motorhomes";
-//    }
+//    UPDATE METHOD
+    @RequestMapping(value="/motorhomes/update", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String update(@ModelAttribute Motorhome motorhome) {
+        motorhomeService.update(motorhome, motorhome.getId());
+        return "redirect:/motorhomes";
+    }
 }

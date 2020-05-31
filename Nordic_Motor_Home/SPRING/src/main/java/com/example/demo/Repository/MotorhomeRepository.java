@@ -26,13 +26,13 @@ public class MotorhomeRepository {
     }
 
     public List<Brand> fetchBrands() {
-        String query = "SELECT b.brand FROM brands b";
+        String query = "SELECT b.id, b.brand FROM brands b";
         RowMapper<Brand> rowMapper = new BeanPropertyRowMapper<>(Brand.class);
         return template.query(query, rowMapper);
     }
 
     public List<Model> fetchModels() {
-        String query = "SELECT m.model FROM models m";
+        String query = "SELECT m.id, m.model FROM models m";
         RowMapper<Model> rowMapper = new BeanPropertyRowMapper<>(Model.class);
         return template.query(query, rowMapper);
     }
@@ -64,10 +64,13 @@ public class MotorhomeRepository {
         return template.queryForObject(query, rowMapper, id);
     }
 
-//    public void update(Motorhome mh, int id) {
-//        String query = "UPDATE motorhomes SET modelId = ?, hp = ?, plate = ?, seatNumber = ?, seatsMaterial = ?, cruiseControl = ?, " +
-//                "pricePerDay = ?, availability = ? WHERE id= ?";
-//        template.update(query, mh.getModelId(), mh.getHp(), mh.getPlate(), mh.getSeatNumber(), mh.getSeatsMaterial(),
-//                mh.getCruiseControl(), mh.getPricePerDay(), mh.getAvailability(), id);
-//    }
+    public void update(Motorhome mh, int id) {
+        String selectModelId = "SELECT m.id FROM models m where m.model = '" + mh.getModel() + "'";
+        int modelId = template.queryForObject(selectModelId, int.class);
+
+        String query = "UPDATE motorhomes SET modelId = ?, hp = ?, plate = ?, seatNumber = ?, seatsMaterial = ?, cruiseControl = ?, " +
+                "pricePerDay = ?, availability = ? WHERE id= ?";
+        template.update(query, modelId, mh.getHp(), mh.getPlate(), mh.getSeatNumber(), mh.getSeatsMaterial(),
+                mh.getCruiseControl(), mh.getPricePerDay(), mh.getAvailability(), id);
+    }
 }

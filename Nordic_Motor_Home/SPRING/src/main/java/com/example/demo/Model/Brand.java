@@ -1,12 +1,22 @@
 package com.example.demo.Model;
 
 public class Brand {
+    int id;
     private String brand;
 
     public Brand() {}
 
-    public Brand(String brand) {
+    public Brand(int id, String brand) {
+        this.id = id;
         this.brand = brand;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getBrand() {

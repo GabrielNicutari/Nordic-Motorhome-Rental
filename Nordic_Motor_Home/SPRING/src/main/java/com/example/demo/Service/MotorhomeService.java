@@ -39,9 +39,9 @@ public class MotorhomeService {
         return motorhomeRepository.deleteRow(id);
     }
 
-//    public void update(Motorhome g, int id) {
-//        motorhomeRepository.update(g, id);
-//    }
+    public void update(Motorhome g, int id) {
+        motorhomeRepository.update(g, id);
+    }
 
     //Get motorhomes by keyword
     public List<Motorhome> findByKeyWord(String keyword) {
