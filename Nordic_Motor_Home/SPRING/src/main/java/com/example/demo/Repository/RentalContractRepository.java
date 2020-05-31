@@ -1,5 +1,7 @@
 package com.example.demo.Repository;
 
+import com.example.demo.Model.Customer;
+import com.example.demo.Model.Motorhome;
 import com.example.demo.Model.RentalContract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -16,8 +18,21 @@ public class RentalContractRepository {
     JdbcTemplate template;
 
     public List<RentalContract> fetchAll() {
-        String query = "SELECT rentalcontracts.*, motorhomes.plate FROM rentalcontracts, motorhomes WHERE rentalcontracts.motorHomeId = motorhomes.id";
+        String query = "SELECT rc.*, mh.plate, c.firstName, c.LastName, b.brand, m.model FROM rentalcontracts rc, motorhomes mh, brands b, models m, customers c " +
+                "WHERE rc.customerId = c.id AND rc.motorHomeId = mh.id AND mh.modelId = m.id AND m.brandId = b.id";
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
+        return template.query(query, rowMapper);
+    }
+
+    public List<Customer> fetchCustomers() {
+        String query = "SELECT * FROM customers";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        return template.query(query, rowMapper);
+    }
+
+    public List<Motorhome> fetchMotorhomes() {
+        String query = "SELECT mh.*, m.model, b.brand FROM models m, brands b, motorhomes mh WHERE mh.modelId = m.id AND m.brandId = b.id";
+        RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(query, rowMapper);
     }
 
@@ -25,7 +40,7 @@ public class RentalContractRepository {
         String query = "INSERT INTO rentalcontracts (customerId, motorhomeId, accessoryId, season, fromDate, toDate, fuel, extraKm, pickUpLocation, dropOffLocation, " +
                 "rentalprice, postRentalPrice, totalPrice, status)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), rc.getAccessoryId(), rc.getSeason(), rc.getFromDate(),
+        template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), 1, rc.getSeason(), rc.getFromDate(),
                 rc.getToDate(), rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), rc.getPostRentalPrice(),
                 rc.getTotalPrice(), rc.getStatus());
     }
@@ -49,9 +64,12 @@ public class RentalContractRepository {
 
     public void update(RentalContract rc, int id) {
         String query = "UPDATE rentalcontracts SET customerId = ?, motorhomeId = ?, accessoryId = ?, season = ?, fromDate = ?, toDate = ?, fuel = ?, extraKm = ?, pickUpLocation = ?, dropOffLocation = ?," +
-                "rentalprice = ?, postRentalPrice = ?, totalPrice = ?, status WHERE id = ?";
+                "rentalprice = ?, postRentalPrice = ?, totalPrice = ?, status = ? WHERE id = ?";
         template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), rc.getAccessoryId(), rc.getSeason(), rc.getFromDate(),
                 rc.getToDate(), rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), rc.getPostRentalPrice(),
                 rc.getTotalPrice(), rc.getStatus(), id);
     }
+
+
+
 }

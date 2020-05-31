@@ -1,5 +1,7 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Customer;
+import com.example.demo.Model.Motorhome;
 import com.example.demo.Model.RentalContract;
 import com.example.demo.Service.RentalContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,12 @@ public class RentalContractController {
     @GetMapping("/rentalContracts")
     public String rentalContracts(Model model, String keyword) {
         List<RentalContract> rentalContractsList = rentalContractService.fetchAll();
+        List<Customer> customerList = rentalContractService.fetchCustomers();
+        List<Motorhome> motorhomeList = rentalContractService.fetchMotorhomes();
+
         model.addAttribute("rentalContracts", rentalContractsList);
+        model.addAttribute("customers", customerList);
+        model.addAttribute("motorhomes", motorhomeList);
 
         if (keyword != null) {
             if(keyword.equals("")) {

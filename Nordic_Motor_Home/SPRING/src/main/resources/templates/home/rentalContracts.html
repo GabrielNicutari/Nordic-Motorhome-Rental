@@ -49,8 +49,6 @@
 
     </header>
 
-
-
     <main>
         <div id="page-wrapper">
 
@@ -64,25 +62,27 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Customer ID</th>
-                        <th>Motorhome ID</th>
-                        <th>Accessory ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Plate</th>
                         <th>Start Date</th>
                         <th>End Date</th>
-                        <th>Plate</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr th:each="rentalContract: ${rentalContracts}">
                         <td th:text="${rentalContract.id}"/>
-                        <td th:text="${rentalContract.customerId}"/>
-                        <td th:text="${rentalContract.motorhomeId}"/>
-                        <td th:text="${rentalContract.accessoryId}"/>
+                        <td th:text="${rentalContract.firstName}"/>
+                        <td th:text="${rentalContract.lastName}"/>
+                        <td th:text="${rentalContract.brand}"/>
+                        <td th:text="${rentalContract.model}"/>
+                        <td th:text="${rentalContract.plate}"/>
                         <td th:text="${rentalContract.fromDate}"/>
                         <td th:text="${rentalContract.toDate}"/>
-                        <td th:text="${rentalContract.plate}"/>
-
                         <td>
                             <div class="btn-group">
                                 <a th:href="@{/rentalContracts/getOne/(id=${rentalContract.id})}" class="btn-update editButton"><i class="fa fa-edit"></i></a>
@@ -175,7 +175,7 @@
 
                         <td>${data[i].id}</td>
                         <td>${data[i].customerId}</td>
-                        <td>${data[i].motorHomeId}</td>
+                        <td>${data[i].motorhomeId}</td>
                         <td>${data[i].accessoryId}</td>
                         <td>${data[i].season}</td>
                         <td>${data[i].fromDate}</td>
@@ -222,20 +222,35 @@
                             <input type="text" class="form-control" id="recipient-id" name="id">
                         </div-->
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Customer ID</label>
-                            <input type="text" class="form-control" id="recipient-customerId" name="customerId" required>
+                        <div class="form-group" >
+                            <label for="recipient-customerId" class="col-form-label" >Customer:</label>
+                            <!--                            <input type="number" class="form-control" id="recipient-modelId" name="modelId" required>-->
+                            <select id="recipient-customerId" class="form-control" name="customerId" required>
+                                <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.fullName}" ></option>
+                            </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Motorhome ID</label>
-                            <input type="text" class="form-control" id="recipient-motorhomeId" name="motorhomeId" required>
+                        <div class="form-group" >
+                            <label for="recipient-motorhomeId" class="col-form-label" >Motorhome:</label>
+                            <select id="recipient-motorhomeId" class="form-control" name="motorhomeId" required>
+                                <option th:each="motorhome: ${motorhomes}" th:value="${motorhome.id}" th:text="${motorhome.carName}" ></option>
+                            </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Accessory ID</label>
-                            <input type="text" class="form-control" id="recipient-accessoryId" name="accessoryId" required>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Customer ID</label>-->
+<!--                            <input type="text" class="form-control" id="recipient-customerId" name="customerId" required>-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Motorhome ID</label>-->
+<!--                            <input type="text" class="form-control" id="recipient-motorhomeId" name="motorhomeId" required>-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Accessory ID</label>-->
+<!--                            <input type="text" class="form-control" id="recipient-accessoryId" name="accessoryId" required>-->
+<!--                        </div>-->
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Season</label>
