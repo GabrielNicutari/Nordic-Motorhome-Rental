@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -41,6 +42,7 @@ public abstract class Person {
 
     public String getEmail() {
         return email;
+
     }
 
     public void setFirstName(String firstName) {

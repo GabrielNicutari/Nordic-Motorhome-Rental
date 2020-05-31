@@ -16,13 +16,13 @@ public class Customer extends Person{
         super();
     }
 
-//    public Customer(int id, String firstName, String lastName, String address, String phoneNumber, String email,
-//                    int customerId, String driverLicenceNumber, Date driverSinceDate) {
-//        super (id, firstName, lastName, address, phoneNumber, email);
-//        this.customerId = customerId;
-//        this.driverLicenceNumber = driverLicenceNumber;
-//        this.driverSinceDate = driverSinceDate;
-//    }
+    public Customer(int id, String firstName, String lastName, String address, String phoneNumber, String email,
+                    int customerId, String driverLicenceNumber, Date driverSinceDate) {
+        super (id, firstName, lastName, address, phoneNumber, email);
+        this.customerId = customerId;
+        this.driverLicenceNumber = driverLicenceNumber;
+        this.driverSinceDate = driverSinceDate;
+    }
 
     public String getDriverLicenceNumber() {
         return driverLicenceNumber;

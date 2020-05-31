@@ -20,9 +20,9 @@ public class CustomerService {
         return customerRepository.fetchAll();
     }
   
-//    public void add(Customer c) {
-//       customerRepository.add(c);
-//    }
+    public void add(Customer c) {
+       customerRepository.add(c);
+    }
 
     public Customer getOne(int id) {
         return customerRepository.findById(id);

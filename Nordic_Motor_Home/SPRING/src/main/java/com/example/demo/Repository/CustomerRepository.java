@@ -21,12 +21,12 @@ public class CustomerRepository {
         return template.query(query, rowMapper);
     }
 
-//    public void add(Customer c) {
-//        String query = "INSERT INTO customers (id, firstName, lastName, address, phoneNumber, email, driverLicenceNumber, driverSinceDate)" +
-//                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-//        template.update(query, c.getId(), c.getFirstName(), c.getLastName(), c.getAddress(), c.getPhoneNumber(), c.getEmail(),
-//                c.getDriverLicenceNumber(), c.getDriverSinceDate());
-//    }
+    public void add(Customer c) {
+        String query = "INSERT INTO customers (id, firstName, lastName, address, phoneNumber, email, driverLicenceNumber, driverSinceDate)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        template.update(query, c.getId(), c.getFirstName(), c.getLastName(), c.getAddress(), c.getPhoneNumber(), c.getEmail(),
+                c.getDriverLicenceNumber(), c.getDriverSinceDate());
+    }
 
     public Boolean deleteRow(int id) {
         String query = "DELETE FROM customers WHERE id = ?";
@@ -51,4 +51,4 @@ public class CustomerRepository {
         template.update(query, c.getFirstName(), c.getLastName(), c.getAddress(), c.getPhoneNumber(), c.getEmail(),
                 c.getDriverLicenceNumber(), c.getDriverSinceDate(), id);
     }
-}
+} 

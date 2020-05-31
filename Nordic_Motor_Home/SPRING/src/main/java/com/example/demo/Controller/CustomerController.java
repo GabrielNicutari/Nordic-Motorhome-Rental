@@ -44,11 +44,11 @@ public class CustomerController {
         return customerService.getOne(id);
     }
 
-//    @PostMapping(value="/customers/add")
-//    public String add(@ModelAttribute Customer c) {
-//        customerService.add(c);
-//        return "redirect:/customers";
-//    }
+    @PostMapping(value="/customers/add")
+    public String add(@ModelAttribute Customer c) {
+        customerService.add(c);
+        return "redirect:/customers";
+    }
 
     @RequestMapping(value="/customers/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     //@GetMapping("/customers/delete/{id}")
@@ -58,9 +58,10 @@ public class CustomerController {
     }
 
     //UPDATE METHOD
-//    @RequestMapping(value="/customers/update", method = {RequestMethod.PUT, RequestMethod.GET})
-//    public String update(@ModelAttribute Customer c) {
-//        customerService.update(c, c.getId());
-//        return "redirect:/customers";
-//    }
+    @RequestMapping(value="/customers/update", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String update(@ModelAttribute Customer c) {
+        customerService.update(c, c.getId());
+        return "redirect:/customers";
+    }
+
 }
