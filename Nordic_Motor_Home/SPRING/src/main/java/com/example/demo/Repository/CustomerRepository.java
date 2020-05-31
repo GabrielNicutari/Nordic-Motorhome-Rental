@@ -72,4 +72,4 @@ public class CustomerRepository {
         template.update(query2, c.getFirstName(), c.getLastName(), c.getAddress(), c.getZipCodeCustomer(),
                 c.getPhoneNumber(), c.getEmail(), c.getDriverLicenceNumber(), c.getDriverSinceDate(), id);
     }
-}
+} 
