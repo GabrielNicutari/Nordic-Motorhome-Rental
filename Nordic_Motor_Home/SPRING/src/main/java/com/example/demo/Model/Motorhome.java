@@ -7,7 +7,7 @@ public class Motorhome {
 
     @Id
     private int id;
-    private int modelId;
+    //private int modelId;      //we might not use this anymore, only in the tables (FK)
     private int hp;
     private String plate;
     private int seatNumber;
@@ -16,12 +16,20 @@ public class Motorhome {
     private double pricePerDay;
     private String availability;
 
+    //Fields from brands & models
+    private String brand;
+    private String model;
+    private String budget;
+    private String size;
+    private String fuelType;
+
     public Motorhome() {}
 
     public Motorhome(int id, int modelId, int hp, String plate, int seatNumber, String seatsMaterial, String cruiseControl,
-                     double pricePerDay, String availability) {
+                     double pricePerDay, String availability, String brand, String model, String budget, String size,
+                     String fuelType) {
         this.id = id;
-        this.modelId = modelId;
+        //this.modelId = modelId;
         this.hp = hp;
         this.plate = plate;
         this.seatNumber = seatNumber;
@@ -29,6 +37,12 @@ public class Motorhome {
         this.cruiseControl = cruiseControl;
         this.pricePerDay = pricePerDay;
         this.availability = availability;
+
+        this.brand = brand;
+        this.model = model;
+        this.budget = budget;
+        this.size = size;
+        this.fuelType = fuelType;
     }
 
     public int getId() {
@@ -39,13 +53,53 @@ public class Motorhome {
         this.id = id;
     }
 
-    public int getModelId() {
-        return modelId;
+//    public int getModelId() {
+//        return modelId;
+//    }
+
+    public String getBrand() {
+        return brand;
     }
 
-    public void setModelId(int modelId) {
-        this.modelId = modelId;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getBudget() {
+        return budget;
+    }
+
+    public void setBudget(String budget) {
+        this.budget = budget;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+//    public void setModelId(int modelId) {
+//        this.modelId = modelId;
+//    }
 
     public int getHp() {
         return hp;
