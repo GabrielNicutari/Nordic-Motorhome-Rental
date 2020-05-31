@@ -70,8 +70,8 @@ $('document').ready(function() {
                 $('#addressEdit').val(customer.address);
                 $('#phoneNumberEdit').val(customer.phoneNumber);
                 $('#emailEdit').val(customer.email);
-                $('#driverLicenceNumberEdit').val(customer.driverLicenceNumber);
                 $('#driverSinceDateEdit').val(customer.driverSinceDate);
+                $('#driverLicenceNumberEdit').val(customer.driverLicenceNumber);
         });
 
         $('#editModal').modal();
