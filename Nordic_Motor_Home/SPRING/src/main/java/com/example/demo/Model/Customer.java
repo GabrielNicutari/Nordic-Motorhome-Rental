@@ -14,20 +14,16 @@ public class Customer extends Person{
     private Date driverSinceDate;
     private String driverLicenceNumber;
 
-    //Only for the RentalContract dropdown
-    private String fullName;
-
     public Customer() {
         super();
     }
 
     public Customer(int id, String firstName, String lastName, String address, String phoneNumber, String email,
-                    Date driverSinceDate, String driverLicenceNumber, String fullName) {
+                    Date driverSinceDate, String driverLicenceNumber) {
         super (firstName, lastName, address, phoneNumber, email);
         this.id = id;
         this.driverSinceDate = driverSinceDate;
         this.driverLicenceNumber = driverLicenceNumber;
-        this.fullName = fullName;
     }
 
     public int getId() {
@@ -68,9 +64,5 @@ public class Customer extends Person{
 
     public void setDriverSinceDate(Date driverSinceDate) {
         this.driverSinceDate = driverSinceDate;
-    }
-
-    public String getFullName() {
-        return getFirstName() + " " + getLastName();
     }
 }

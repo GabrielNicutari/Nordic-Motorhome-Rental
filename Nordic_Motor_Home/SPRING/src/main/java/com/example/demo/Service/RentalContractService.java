@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import com.example.demo.Model.Accessory;
 import com.example.demo.Model.Customer;
 import com.example.demo.Model.Motorhome;
 import com.example.demo.Model.RentalContract;
@@ -15,8 +16,6 @@ public class RentalContractService {
     @Autowired
     private RentalContractRepository rentalContractRepository;
 
-    //List<Person> persons = new ArrayList<>();
-
     public List<RentalContract> fetchAll() {
         return rentalContractRepository.fetchAll();
     }
@@ -27,6 +26,10 @@ public class RentalContractService {
 
     public List<Motorhome> fetchMotorhomes() {
         return rentalContractRepository.fetchMotorhomes();
+    }
+
+    public List<Accessory> fetchAccessories() {
+        return rentalContractRepository.fetchAccessories();
     }
   
     public void add(RentalContract g) {
@@ -49,7 +52,4 @@ public class RentalContractService {
     public List<RentalContract> findByKeyWord(String keyword) {
         return rentalContractRepository.findByKeyWord(keyword);
     }
-
-
-
 }

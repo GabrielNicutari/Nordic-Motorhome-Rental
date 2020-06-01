@@ -12,13 +12,14 @@ public class RentalContract {
     private int customerId;
     private int motorhomeId;
     private int accessoryId;
-    private String accessory;
     private String season;
     private String fromDate;
     private String toDate;
     private String fuel;
     private double extraKm;
     private int pickUpLocation;
+    private String newPickUpLocation;
+    private String newDropOffLocation;
     private int dropOffLocation;
     private double rentalPrice;
     private double postRentalPrice;
@@ -50,16 +51,16 @@ public class RentalContract {
 
     public RentalContract() {}
 
-    public RentalContract(int id, int customerId, int motorhomeId, String accessory, String season, String fromDate, String toDate, String fuel,
+    public RentalContract(int id, int customerId, int motorhomeId, int accessoryId, String season, String fromDate, String toDate, String fuel,
                           double extraKm, int pickUpLocation, int dropOffLocation, double rentalPrice, double postRentalPrice,
                           double totalPrice, String status, String brand, String model, String plate, String budget, String size, String cruiseControl,
                           int hp, int seatNumber, String seatMaterial, double pricePerDay, String firstName, String lastName, String address,
-                          String zipCode, String city, String phoneNumber, String email, Date driverSinceDate, String driverLicenceNumber) {
+                          String zipCode, String city, String phoneNumber, String email, Date driverSinceDate, String driverLicenceNumber,
+                          String newPickUpLocation, String newDropOffLocation) {
         this.id = id;
         this.customerId = customerId;
         this.motorhomeId = motorhomeId;
         this.accessoryId = accessoryId;
-        this.accessory = accessory;
         this.season = season;
         this.fromDate = fromDate;
         this.toDate = toDate;
@@ -92,6 +93,9 @@ public class RentalContract {
         this.email = email;
         this.driverSinceDate = driverSinceDate;
         this.driverLicenceNumber = driverLicenceNumber;
+
+        this.newPickUpLocation = newPickUpLocation;
+        this.newDropOffLocation = newDropOffLocation;
     }
 
     public int getId() {
@@ -364,5 +368,21 @@ public class RentalContract {
 
     public void setDriverLicenceNumber(String driverLicenceNumber) {
         this.driverLicenceNumber = driverLicenceNumber;
+    }
+
+    public String getNewPickUpLocation() {
+        return newPickUpLocation;
+    }
+
+    public void setNewPickUpLocation(String newPickUpLocation) {
+        this.newPickUpLocation = newPickUpLocation;
+    }
+
+    public String getNewDropOffLocation() {
+        return newDropOffLocation;
+    }
+
+    public void setNewDropOffLocation(String newDropOffLocation) {
+        this.newDropOffLocation = newDropOffLocation;
     }
 }

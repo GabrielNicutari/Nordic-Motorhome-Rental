@@ -1,5 +1,6 @@
 package com.example.demo.Repository;
 
+import com.example.demo.Model.Accessory;
 import com.example.demo.Model.Customer;
 import com.example.demo.Model.Motorhome;
 import com.example.demo.Model.RentalContract;
@@ -36,13 +37,59 @@ public class RentalContractRepository {
         return template.query(query, rowMapper);
     }
 
+    public List<Accessory> fetchAccessories() {
+        String query = "SELECT * FROM accessories";
+        RowMapper<Accessory> rowMapper = new BeanPropertyRowMapper<>(Accessory.class);
+        return template.query(query, rowMapper);
+    }
+
     public void add(RentalContract rc) {
+        //check if location exists
+        checkLocation(rc, rc.getNewPickUpLocation(), "pick");
+        checkLocation(rc, rc.getNewDropOffLocation(), "drop");
+
         String query = "INSERT INTO rentalcontracts (customerId, motorhomeId, accessoryId, season, fromDate, toDate, fuel, extraKm, pickUpLocation, dropOffLocation, " +
                 "rentalprice, postRentalPrice, totalPrice, status)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), 1, rc.getSeason(), rc.getFromDate(),
                 rc.getToDate(), rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), rc.getPostRentalPrice(),
                 rc.getTotalPrice(), rc.getStatus());
+    }
+
+    public void checkLocation(RentalContract rc, String newLocation, String flag) {
+        int locationId;
+
+        if(doesLocationExist(newLocation)) {
+
+            locationId = findLocationId(newLocation);
+            if(flag.equals("pick")) {
+                rc.setPickUpLocation(locationId);
+            } else {
+                rc.setDropOffLocation(locationId);
+            }
+
+        } else {
+            String query = "INSERT INTO locations (name, free) VALUES (?, ?)";
+            template.update(query, newLocation, 0); //0 means the location is outside the ones used by the company,
+            // hence the customer is charged, 1 - the opposite
+
+            locationId = findLocationId(newLocation);
+            if(flag.equals("pick")) {
+                rc.setPickUpLocation(locationId);
+            } else {
+                rc.setDropOffLocation(locationId);
+            }
+        }
+    }
+
+    public Boolean doesLocationExist(String location) {
+        return template.queryForObject("SELECT EXISTS(SELECT name FROM locations WHERE name = \"" + location + "\")", Boolean.class);
+    }
+
+    public int findLocationId(String location) {
+        String findLocationId = "SELECT l.id FROM locations l WHERE l.name = '" + location + "'";
+        int locationId = template.queryForObject(findLocationId, int.class);
+        return locationId;
     }
 
     public Boolean deleteRow(int id) {

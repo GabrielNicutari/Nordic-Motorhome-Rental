@@ -23,14 +23,11 @@ public class Motorhome {
     private String size;
     private String fuelType;
 
-    //Only for the RentalContract dropdown
-    private String carName;
-
     public Motorhome() {}
 
     public Motorhome(int id, int modelId, int hp, String plate, int seatNumber, String seatsMaterial, String cruiseControl,
                      double pricePerDay, String availability, String brand, String model, String budget, String size,
-                     String fuelType, String carName) {
+                     String fuelType) {
         this.id = id;
         //this.modelId = modelId;
         this.hp = hp;
@@ -46,8 +43,6 @@ public class Motorhome {
         this.budget = budget;
         this.size = size;
         this.fuelType = fuelType;
-
-        this.carName = carName;
     }
 
     public int getId() {
@@ -160,9 +155,5 @@ public class Motorhome {
 
     public void setAvailability(String availability) {
         this.availability = availability;
-    }
-
-    public String getCarName() {
-        return this.brand + " " + this.model + " - " + this.plate;
     }
 }
