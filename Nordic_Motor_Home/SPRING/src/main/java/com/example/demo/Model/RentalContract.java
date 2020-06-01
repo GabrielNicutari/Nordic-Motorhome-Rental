@@ -13,8 +13,8 @@ public class RentalContract {
     private int motorhomeId;
     private int accessoryId;
     private String season;
-    private String fromDate;
-    private String toDate;
+    private Date fromDate;
+    private Date toDate;
     private String fuel;
     private double extraKm;
     private int pickUpLocation;
@@ -51,7 +51,7 @@ public class RentalContract {
 
     public RentalContract() {}
 
-    public RentalContract(int id, int customerId, int motorhomeId, int accessoryId, String season, String fromDate, String toDate, String fuel,
+    public RentalContract(int id, int customerId, int motorhomeId, int accessoryId, String season, Date fromDate, Date toDate, String fuel,
                           double extraKm, int pickUpLocation, int dropOffLocation, double rentalPrice, double postRentalPrice,
                           double totalPrice, String status, String brand, String model, String plate, String budget, String size, String cruiseControl,
                           int hp, int seatNumber, String seatMaterial, double pricePerDay, String firstName, String lastName, String address,
@@ -130,19 +130,19 @@ public class RentalContract {
         this.season = season;
     }
 
-    public String getFromDate() {
+    public Date getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(String fromDate) {
+    public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
     }
 
-    public String getToDate() {
+    public Date getToDate() {
         return toDate;
     }
 
-    public void setToDate(String toDate) {
+    public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
 
