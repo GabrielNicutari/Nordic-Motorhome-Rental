@@ -37,7 +37,8 @@ public class EmployeeRepository {
                 " FROM employees e " +
                 "JOIN zip " +
                 "ON e.zipCodeEmployee = zip.zipCode " +
-                "WHERE e.firstName LIKE '%" + keyword + "%' OR e.lastName LIKE '%" + keyword + "%'";
+                "WHERE e.firstName LIKE '%" + keyword + "%' OR e.lastName LIKE '%" + keyword + "%' OR e.cpr LIKE '" + keyword +
+                "%' OR e.phoneNumber LIKE '" + keyword + "%'";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
         return template.query(query, rowMapper);
     }
