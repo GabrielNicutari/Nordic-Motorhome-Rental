@@ -2,6 +2,8 @@
  *
  */
 
+
+
 $('document').ready(function() {
 
     $('.deleteButton').on('click',function (event) {

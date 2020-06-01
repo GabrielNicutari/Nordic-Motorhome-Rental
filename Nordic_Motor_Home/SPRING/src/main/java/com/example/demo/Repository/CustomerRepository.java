@@ -38,7 +38,6 @@ public class CustomerRepository {
                 c.getDriverSinceDate(), c.getDriverLicenceNumber());
     }
 
-    //@Autowired private JdbcTemplate jdbcTemplate;
     private boolean doesZipExist(String newZip) { // checks if the zip already exists in the zip table
         return template.queryForObject("SELECT EXISTS(SELECT zipCode FROM zip " +
                 "WHERE zipCode = \"" + newZip + "\")", Boolean.class);
