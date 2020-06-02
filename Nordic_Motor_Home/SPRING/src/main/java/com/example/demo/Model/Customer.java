@@ -18,10 +18,12 @@ public class Customer extends Person{
         super();
     }
 
-    public Customer(int id, String firstName, String lastName, String address, String phoneNumber, String email,
+    public Customer(int id, String firstName, String lastName, String address, String zipCodeCustomer, String city, String phoneNumber, String email,
                     Date driverSinceDate, String driverLicenceNumber) {
         super (firstName, lastName, address, phoneNumber, email);
         this.id = id;
+        this.zipCodeCustomer = zipCodeCustomer;
+        this.city = city;
         this.driverSinceDate = driverSinceDate;
         this.driverLicenceNumber = driverLicenceNumber;
     }

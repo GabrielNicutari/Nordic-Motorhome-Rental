@@ -17,6 +17,9 @@
     <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/main.js" th:src="@{/main.js}"></script>
+
+
+
 </head>
 <body>
 
@@ -449,7 +452,7 @@
     
     <!-- delete bootstrap modal -->
     <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modalCenter" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                      <h5 class="modal-title">Confirm Delete</h5>
@@ -470,18 +473,19 @@
 
     <!-- view bootstrap modal -->
     <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="viewModal-content">
-                    <div class="viewModal-header">
-                        <h5 class="viewModal-title" id="viewModalLabel">View Contract</h5>
+        <form th:action="@{/rentalContracts/update}" method="put">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-header">
                         <a href="/rentalcontracts">
                             <img  class="car_icon" src="car_icon.png" alt="car_icon"> </a>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h5 class="viewModal-title" id="viewModalLabel">Rental Agreement</h5>
                     </div>
 
-                    <div class="viewModal-body">
+                    <div class="modal-body">
 
                             <div class="viewModal-section_header">
                                 <h5 class="viewModal-section_header-title" id="viewModal-section_headerLabel">Policy Information</h5>
@@ -765,11 +769,12 @@
 
 
 
-                    <div class="viewModal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
                     </div>
                 </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
+            </form>
     </div>
 
 

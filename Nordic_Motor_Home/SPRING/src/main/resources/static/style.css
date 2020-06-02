@@ -88,6 +88,10 @@ ul{
     margin-right: -125px;
 }
 
+.modal {
+    margin: 0 auto !important;
+}
+
 li a{
     color: white;
     font-size: 17px;
@@ -161,7 +165,6 @@ a.menu:hover {
     letter-spacing: 16px;
 }
 
-
 .modal-header {
     border-bottom: 1px solid darkgray!important;
 }
@@ -227,8 +230,6 @@ h2 {
     margin: 0 auto;
     margin-bottom: 11% !important;
 }
-
-
 
 #buttom-wrapper {
     width: 1200px;
@@ -530,7 +531,7 @@ form.example button {
     width: 0px;
 }
 
-.viewModal-content {
+#viewModal .modal-content {
     position: relative;
     display: -ms-flexbox;
     display: flex;
@@ -538,7 +539,7 @@ form.example button {
     flex-direction: column;
     background:#e1e1e1;
     margin: 0 auto;
-    width: 1200px;
+    width: 100%;
     z-index:41;
     top: 25%;
     padding:30px;
@@ -547,7 +548,7 @@ form.example button {
     box-shadow:0 0 10px rgba(0,0,0,0.4);
 }
 
-.viewModal-backdrop {
+#viewModal .modal-backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -557,15 +558,15 @@ form.example button {
     background-color: #000;
 }
 
-.viewModal-backdrop.fade {
+#viewModal .modal-backdrop.fade {
     opacity: 0;
 }
 
-.viewModal-backdrop.show {
+#viewModal .modal-backdrop.show {
     opacity: 0.5;
 }
 
-.viewModal-header {
+#viewModal .modal-header {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: start;
@@ -576,11 +577,11 @@ form.example button {
     border-bottom: 1px solid #dee2e6;
     border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
-    background: red;
+    background: #F8FFB5;
     width: 100%;
 }
 
-.viewModal-header .close {
+#viewModal .modal-header .close {
     padding: 1rem 1rem;
     margin: -1rem -1rem -1rem auto;
 }
@@ -588,22 +589,24 @@ form.example button {
 .viewModal-title {
     margin-bottom: 0;
     line-height: 1.5;
+    float: right;
+    font-size: 40px;
+    color: black;
 }
 
-.viewModal-body {
+#viewModal .modal-body {
     background: #FFFFFF;
     /*-ms-flex: 1 1 auto;*/
     /*flex: 1 1 auto;*/
     padding: 1rem;
 }
 
-.viewModal-footer {
+#viewModal .modal-footer {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
     align-items: center;
     -ms-flex-pack: end;
-    background: green;
     justify-content: flex-end;
     padding: 1rem;
     border-top: 1px solid 3;
@@ -612,15 +615,15 @@ form.example button {
     border-bottom-left-radius: 0.3rem;
 }
 
-.viewModal-footer > :not(:first-child) {
+#viewModal .modal-footer > :not(:first-child) {
     margin-left: .25rem;
 }
 
-.viewModal-footer > :not(:last-child) {
+#viewModal .modal-footer > :not(:last-child) {
     margin-right: .25rem;
 }
 
-.viewModal {
+#viewModal .modal {
 }
 
 .viewForm-control {
@@ -656,8 +659,9 @@ form.example button {
 }
 
 .car_icon {
-    height: 20px;
+    height: 60px;
     width: auto;
+    float: left;
 }
 
 .viewModal-section_header {
@@ -673,6 +677,8 @@ form.example button {
     margin: 0 auto;
     padding-bottom: 15px;
     padding-top: 15px;
+    float: right;
+    color: black;
 }
 
 
@@ -683,6 +689,7 @@ form.example button {
     text-align: left !important;
     vertical-align: middle !important;
     padding-top: 2px;
+    color: black;
 }
 
 .col-form-label-inline-payment {
@@ -692,11 +699,13 @@ form.example button {
     text-align: left !important;
     vertical-align: middle !important;
     padding-top: 2px;
+    color: black;
 }
 
 .col-form-label {
     float: left;
     text-align: left !important;
+    color: black;
 }
 
 table#policyInformationTable {
@@ -758,6 +767,38 @@ table#signaturesTable td {
     width: 70%;
     border-bottom: 1px dotted black;
 }
+
+#viewModal .close {
+    align-self: flex-end !important;
+    float: right !important;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    padding-bottom: 10px;
+    padding-top: -25px;
+}
+
+#viewModal .close:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+#viewModal .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
+    opacity: .75;
+}
+
+#viewModal button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 
 
 
