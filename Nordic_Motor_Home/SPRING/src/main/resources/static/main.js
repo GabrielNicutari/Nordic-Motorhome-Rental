@@ -69,6 +69,8 @@ $('document').ready(function() {
                 $('#firstNameEdit').val(customer.firstName);
                 $('#lastNameEdit').val(customer.lastName);
                 $('#addressEdit').val(customer.address);
+                $('#zipCodeCustomerEdit').val(customer.zipCodeCustomer);
+                $('#cityEdit').val(customer.city);
                 $('#phoneNumberEdit').val(customer.phoneNumber);
                 $('#emailEdit').val(customer.email);
                 $('#driverSinceDateEdit').val(customer.driverSinceDate);
