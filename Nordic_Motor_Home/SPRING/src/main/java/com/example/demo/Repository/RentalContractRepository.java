@@ -22,7 +22,8 @@ public class RentalContractRepository {
     JdbcTemplate template;
 
     public List<RentalContract> fetchAll() {
-        String query = "SELECT rc.*, mh.plate, mh.pricePerDay, c.firstName, c.LastName, b.brand, m.model FROM rentalcontracts rc, motorhomes mh, brands b, models m, customers c " +
+        String query = "SELECT rc.*, mh.plate, c.firstName, c.lastName, c.address, b.brand, m.model " +
+                "FROM rentalcontracts rc, motorhomes mh, brands b, models m, customers c " +
                 "WHERE rc.customerId = c.id AND rc.motorHomeId = mh.id AND mh.modelId = m.id AND m.brandId = b.id ORDER BY rc.id";
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         return template.query(query, rowMapper);
@@ -77,7 +78,7 @@ public class RentalContractRepository {
 
         } else {
             String query = "INSERT INTO locations (name, free) VALUES (?, ?)";
-            template.update(query, newLocation, 0); //0 means the location is outside the ones used by the company,
+            template.update(query, newLocation, 0); //0 means the location is different from the ones used by the company,
             // hence the customer is charged, 1 - the opposite
 
             locationId = findLocationId(newLocation);
@@ -192,9 +193,36 @@ public class RentalContractRepository {
     }
 
     public RentalContract findById(int id) {
-        String query = "SELECT * FROM rentalcontracts WHERE id = ?";
+        String query = "SELECT rc.*, mh.plate, c.firstName, c.lastName, c.address, b.brand, m.model " +
+                "FROM rentalcontracts rc, motorhomes mh, brands b, models m, customers c " +
+                "WHERE rc.customerId = c.id AND rc.motorHomeId = mh.id AND mh.modelId = m.id AND m.brandId = b.id AND rc.id = ? ORDER BY rc.id";
+
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         return template.queryForObject(query, rowMapper, id);
+    }
+
+    public String findPickUpLocationName(int id) {
+        int pickUpLocationId = findPickUpLocationId(id);
+        String findPickUpLocationName = "SELECT l.name FROM locations l WHERE l.id = '" + pickUpLocationId + "'";
+        return template.queryForObject(findPickUpLocationName, String.class);
+    }
+
+    public String findDropOffLocationName(int id) {
+        int dropOffLocationId = findDropOffLocationId(id);
+        String findDropOffLocationId = "SELECT l.name FROM locations l WHERE l.id = '" + dropOffLocationId + "'";
+        return template.queryForObject(findDropOffLocationId, String.class);
+    }
+
+    private int findPickUpLocationId(int id) {
+        String findLocationId = "SELECT rc.pickUpLocation FROM rentalContracts rc WHERE rc.id = " + id;
+        int pickUpLocationId = template.queryForObject(findLocationId, int.class);
+        return pickUpLocationId;
+    }
+
+    private int findDropOffLocationId(int id) {
+        String findLocationId = "SELECT rc.dropOffLocation FROM rentalContracts rc WHERE rc.id = " + id;
+        int dropOffLocationId = template.queryForObject(findLocationId, int.class);
+        return dropOffLocationId;
     }
 
     public void update(RentalContract rc, int id) {
@@ -204,7 +232,4 @@ public class RentalContractRepository {
                 rc.getToDate(), rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), rc.getPostRentalPrice(),
                 rc.getTotalPrice(), rc.getStatus(), id);
     }
-
-
-
 }

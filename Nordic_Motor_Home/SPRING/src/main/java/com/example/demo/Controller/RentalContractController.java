@@ -50,7 +50,13 @@ public class RentalContractController {
     @RequestMapping("/rentalContracts/getOne")
     @ResponseBody
     public RentalContract getOne(int id) {
-        return rentalContractService.getOne(id);
+
+        RentalContract rc = rentalContractService.getOne(id);
+
+        //find the location names from the locations table based on the rentalContract id & set them in the rentalContract class
+        rc.setNewPickUpLocation(rentalContractService.findPickUpLocationName(id));
+        rc.setNewDropOffLocation(rentalContractService.findDropOffLocationName(id));
+        return rc;
     }
 
     @PostMapping(value="/rentalContracts/add")

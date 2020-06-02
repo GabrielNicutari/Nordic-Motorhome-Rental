@@ -44,12 +44,22 @@ public class RentalContractService {
         return rentalContractRepository.deleteRow(id);
     }
 
-    public void update(RentalContract g, int id) {
-        rentalContractRepository.update(g, id);
+    public void update(RentalContract rc, int id) {
+        rentalContractRepository.update(rc, id);
     }
 
     //Get rental Contract by keyword
     public List<RentalContract> findByKeyWord(String keyword) {
         return rentalContractRepository.findByKeyWord(keyword);
+    }
+
+
+
+    public String findPickUpLocationName(int id) {
+        return rentalContractRepository.findPickUpLocationName(id);
+    }
+
+    public String findDropOffLocationName(int id) {
+        return rentalContractRepository.findDropOffLocationName(id);
     }
 }

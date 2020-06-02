@@ -1,9 +1,6 @@
 /**
  *
  */
-
-
-
 $('document').ready(function() {
 
     $('.deleteButton').on('click',function (event) {
@@ -88,30 +85,18 @@ $('document').ready(function() {
 
         var href = $(this).attr('href');
 
-        $.get(href, function(motorhome, status) {
-            $('#idView').val(motorhome.id);
-            $('#modelView').val(motorhome.modelId);
-            $('#hpView').val(motorhome.hp);
-            $('#plateView').val(motorhome.plate);
-            $('#seatNumberView').val(motorhome.seatNumber);
-            $('#seatsMaterialView').val(motorhome.seatsMaterial);
-            $('#cruiseControlView').val(motorhome.cruiseControl);
-            $('#pricePerDayView').val(motorhome.pricePerDay);
-            $('#availabilityView').val(motorhome.availability);
-        });
-  
         $.get(href, function(rentalcontract, status) {
             $('#idView').val(rentalcontract.id);
-            $('#customerIdView').val(rentalcontract.customerId);
-            $('#motorhomeIdView').val(rentalcontract.motorhomeId);
-            $('#accessoryIdView').val(rentalcontract.accessoryId);
+            $('#firstNameView').val(rentalcontract.firstName)
+            $('#lastNameView').val(rentalcontract.lastName);
+            $('#addressView').val(rentalcontract.address);
             $('#seasonView').val(rentalcontract.season);
             $('#fromDateView').val(rentalcontract.fromDate);
             $('#toDateView').val(rentalcontract.toDate);
-            $('#fuelView').val(rentalcontract.fuel);
-            $('#extraKmView').val(rentalcontract.extraKm);
-            $('#pickUpLocationView').val(rentalcontract.pickUpLocation);
-            $('#dropOffLocationView').val(rentalcontract.dropOffLocation);
+            // $('#fuelView').val(rentalcontract.fuel);
+            // $('#extraKmView').val(rentalcontract.extraKm);
+            $('#newPickUpLocationView').val(rentalcontract.newPickUpLocation);
+            $('#newDropOffLocationView').val(rentalcontract.newDropOffLocation);
             $('#rentalPriceView').val(rentalcontract.rentalPrice);
             $('#postRentalPriceView').val(rentalcontract.postRentalPrice);
             $('#totalPriceView').val(rentalcontract.totalPrice);
