@@ -16,7 +16,6 @@ public class CustomerService {
     //List<Person> persons = new ArrayList<>();
 
     public List<Customer> fetchAll() {
-        //personRepository.fetchAll().forEach(persons::add);  //Get everything from the db and add it into an arraylist
         return customerRepository.fetchAll();
     }
   

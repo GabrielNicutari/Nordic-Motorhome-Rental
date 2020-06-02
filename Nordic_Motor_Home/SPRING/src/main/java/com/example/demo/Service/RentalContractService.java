@@ -1,5 +1,7 @@
 package com.example.demo.Service;
 
+import com.example.demo.Model.Accessory;
+import com.example.demo.Model.Customer;
 import com.example.demo.Model.Motorhome;
 import com.example.demo.Model.RentalContract;
 import com.example.demo.Repository.RentalContractRepository;
@@ -14,11 +16,20 @@ public class RentalContractService {
     @Autowired
     private RentalContractRepository rentalContractRepository;
 
-    //List<Person> persons = new ArrayList<>();
-
     public List<RentalContract> fetchAll() {
-        //personRepository.fetchAll().forEach(persons::add);  //Get everything from the db and add it into an arraylist
         return rentalContractRepository.fetchAll();
+    }
+
+    public List<Customer> fetchCustomers() {
+        return rentalContractRepository.fetchCustomers();
+    }
+
+    public List<Motorhome> fetchMotorhomes() {
+        return rentalContractRepository.fetchMotorhomes();
+    }
+
+    public List<Accessory> fetchAccessories() {
+        return rentalContractRepository.fetchAccessories();
     }
   
     public void add(RentalContract g) {

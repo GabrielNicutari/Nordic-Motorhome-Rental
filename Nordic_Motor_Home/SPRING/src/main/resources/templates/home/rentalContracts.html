@@ -49,8 +49,6 @@
 
     </header>
 
-
-
     <main>
         <div id="page-wrapper">
 
@@ -64,25 +62,27 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Customer ID</th>
-                        <th>Motorhome ID</th>
-                        <th>Accessory ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Plate</th>
                         <th>Start Date</th>
                         <th>End Date</th>
-                        <th>Plate</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr th:each="rentalContract: ${rentalContracts}">
                         <td th:text="${rentalContract.id}"/>
-                        <td th:text="${rentalContract.customerId}"/>
-                        <td th:text="${rentalContract.motorhomeId}"/>
-                        <td th:text="${rentalContract.accessoryId}"/>
+                        <td th:text="${rentalContract.firstName}"/>
+                        <td th:text="${rentalContract.lastName}"/>
+                        <td th:text="${rentalContract.brand}"/>
+                        <td th:text="${rentalContract.model}"/>
+                        <td th:text="${rentalContract.plate}"/>
                         <td th:text="${rentalContract.fromDate}"/>
                         <td th:text="${rentalContract.toDate}"/>
-                        <td th:text="${rentalContract.plate}"/>
-
                         <td>
                             <div class="btn-group">
                                 <a th:href="@{/rentalContracts/getOne/(id=${rentalContract.id})}" class="btn-update editButton"><i class="fa fa-edit"></i></a>
@@ -175,7 +175,7 @@
 
                         <td>${data[i].id}</td>
                         <td>${data[i].customerId}</td>
-                        <td>${data[i].motorHomeId}</td>
+                        <td>${data[i].motorhomeId}</td>
                         <td>${data[i].accessoryId}</td>
                         <td>${data[i].season}</td>
                         <td>${data[i].fromDate}</td>
@@ -222,25 +222,54 @@
                             <input type="text" class="form-control" id="recipient-id" name="id">
                         </div-->
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Customer ID</label>
-                            <input type="text" class="form-control" id="recipient-customerId" name="customerId" required>
+                        <div class="form-group" >
+                            <label for="recipient-customerId" class="col-form-label" >Customer:</label>
+                            <!--                            <input type="number" class="form-control" id="recipient-modelId" name="modelId" required>-->
+                            <select id="recipient-customerId" class="form-control" name="customerId" required>
+                                <option class="dropdown-header" disabled >First Name & Last Name</option>
+                                <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.firstName} + ' ' + ${customer.lastName}" ></option>
+                            </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Motorhome ID</label>
-                            <input type="text" class="form-control" id="recipient-motorhomeId" name="motorhomeId" required>
+                        <div class="form-group" >
+                            <label for="recipient-motorhomeId" class="col-form-label" >Motorhome:</label>
+                            <select id="recipient-motorhomeId" class="form-control" name="motorhomeId" required>
+                                <option class="dropdown-header" disabled >Brand & Model - Plate - Price Per Day</option>
+                                <option th:each="motorhome: ${motorhomes}" th:value="${motorhome.id}" th:text="${motorhome.brand} + ' ' + ${motorhome.model} + ' - ' + ${motorhome.plate}
+                                + ' - ' + ${motorhome.pricePerDay} + ' DKK/day'"></option>
+                            </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Accessory ID</label>
-                            <input type="text" class="form-control" id="recipient-accessoryId" name="accessoryId" required>
+                        <div class="form-group" >
+                            <label for="recipient-accessoryId" class="col-form-label" >Accessory:</label>
+                            <select id="recipient-accessoryId" class="form-control" name="accessoryId" required>
+                                <option class="dropdown-header" disabled >Accessory - Price</option>
+                                <option th:each="accessory: ${accessories}" th:value="${accessory.id}" th:text="${accessory.accessory} + ' - ' +  ${accessory.price} + ' DKK'"></option>
+                            </select>
                         </div>
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Customer ID</label>-->
+<!--                            <input type="text" class="form-control" id="recipient-customerId" name="customerId" required>-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Motorhome ID</label>-->
+<!--                            <input type="text" class="form-control" id="recipient-motorhomeId" name="motorhomeId" required>-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Accessory ID</label>-->
+<!--                            <input type="text" class="form-control" id="recipient-accessoryId" name="accessoryId" required>-->
+<!--                        </div>-->
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Season</label>
-                            <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control" id="recipient-season" name="season" required>
+                            <select class="form-control" id="recipient-season" name="season" required>
+                                <option>Low</option>
+                                <option>Middle</option>
+                                <option>Peak</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -255,45 +284,46 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Fuel</label>
-                            <input type="number" class="form-control"  id="recipient-fuel" name="fuel" required>
+                            <input type="number" class="form-control" placeholder="100" value="100" name="fuel" readonly>
                         </div>
+<!--                        It should be 100 by default -->
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Extra Kilometers:</label>
-                            <input type="number" class="form-control"  id="recipient-extraKm" name="extraKm" required>
+                            <input type="number" class="form-control"  id="recipient-extraKm" name="extraKm" placeholder="0" required>
                         </div>
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Pick up location:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-pickUpLocation" name="pickUpLocation" required>
+                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-newPickUpLocation" name="newPickUpLocation" required>
                         </div>
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Drop off location:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-dropOffLocation" name="dropOffLocation" required>
+                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-newDropOffLocation" name="newDropOffLocation" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Rental Price:</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-rentalPrice" name="rentalPrice" required>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Rental Price:</label>-->
+<!--                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-rentalPrice" name="rentalPrice" required>-->
+<!--                        </div>-->
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Post rental price:</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-postRentalPrice" name="postRentalPrice" required>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Post rental price:</label>-->
+<!--                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-postRentalPrice" name="postRentalPrice" required>-->
+<!--                        </div>-->
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Total Price:</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-totalPrice" name="totalPrice" required>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Total Price:</label>-->
+<!--                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-totalPrice" name="totalPrice" required>-->
+<!--                        </div>-->
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Status:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-status" name="status" required>
+                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-status" name="status" placeholder="Active" readonly>
                         </div>
 
                     </div>
@@ -535,92 +565,297 @@
                 <div class="viewModal-content">
                     <div class="viewModal-header">
                         <h5 class="viewModal-title" id="viewModalLabel">View Contract</h5>
+                        <a href="/rentalcontracts">
+                            <img  class="car_icon" src="car_icon.png" alt="car_icon"> </a>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
                     <div class="viewModal-body">
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">ID:</label>
-                            <input type="text" class="viewForm-control" id="idView" name="id" readonly>
+                            <div class="viewModal-section_header">
+                                <h5 class="viewModal-section_header-title" id="viewModal-section_headerLabel">Policy Information</h5>
+                            </div>
+                        <table id="policyInformationTable">
+
+                            <tr class="no-bottom-border">
+
+                            <td>
+                            <div class="viewForm-group">
+                                <label for="recipient-name" class="col-form-label-inline">Contract ID:</label>
+                                <input type="text" class="viewForm-control-inline" id="idView" name="id" readonly>
+                            </div>
+                            </td>
+
+                                <td> <br> </td>
+
+                            <td>
+                            <div class="viewForm-group">
+                                <label for="recipient-name" class="col-form-label-inline">Creation Date:</label>
+                                <input type="text" class="viewForm-control-inline" id="customerIdView" name="customerId" readonly>
+                            </div>
+                            </td>
+
+                            </tr>
+
+                        </table>
+
+                            <div class="viewModal-section_header">
+                                <h5 class="viewModal-section_header-title" id="viewModal-section_headerLabel2">Customer Information</h5>
+                            </div>
+
+                        <table id="generalInformationTable">
+                            <tr class="no-bottom-border">
+                                <td>
+                            <div class="viewForm-group">
+                                <label for="recipient-name" class="col-form-label-inline">First name:</label>
+                                <input type="text" class="viewForm-control-inline" id="motorhomeIdView" name="motorhomeId" readonly>
+                            </div>
+                                </td>
+                                <td>
+                            <div class="viewForm-group">
+                                <label for="recipient-name" class="col-form-label-inline">Last name:</label>
+                                <input type="text" class="viewForm-control-inline" id="accessoryIdView" name="accessoryId" readonly>
+                            </div>
+                                </td>
+                                <td> <br> </td>
+
+                            </tr>
+
+                            <tr class="no-bottom-border">
+                                <td>
+                            <div class="viewForm-group">
+                                <label for="recipient-name" class="col-form-label-inline">Adress:</label>
+                                <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                                       oninput="this.setCustomValidity('')" class="viewForm-control-inline" id="seasonView" name="season" readonly>
+                            </div>
+                                </td>
+                                <td>
+                            <div class="viewForm-group">
+                                <label for="recipient-name" class="col-form-label-inline">Zip:</label>
+                                <input type="date" class="viewForm-control-inline" id="fromDateView" name="fromDate" readonly>
+                            </div>
+                                </td>
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">City:</label>
+                                        <input type="date" class="viewForm-control-inline" id="fromDateView" name="fromDate" readonly>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="no-bottom-border">
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Phone number:</label>
+                                        <input type="text" class="viewForm-control-inline" id="motorhomeIdView" name="motorhomeId" readonly>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Email:</label>
+                                        <input type="text" class="viewForm-control-inline" id="accessoryIdView" name="accessoryId" readonly>
+                                    </div>
+                                </td>
+                                <td> <br> </td>
+                            </tr>
+
+                            <tr class="no-bottom-border">
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Driver license number:</label>
+                                        <input type="text" class="viewForm-control-inline" id="motorhomeIdView" name="motorhomeId" readonly>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Driver since:</label>
+                                        <input type="text" class="viewForm-control-inline" id="accessoryIdView" name="accessoryId" readonly>
+                                    </div>
+                                </td>
+                                <td> <br> </td>
+                            </tr>
+
+                        </table>
+
+                        <div class="viewModal-section_header">
+                            <h5 class="viewModal-section_header-title" id="viewModal-section_headerLabel3">Car Information</h5>
                         </div>
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Customer ID:</label>
-                            <input type="text" class="viewForm-control" id="customerIdView" name="customerId" readonly>
+                        <table id="carInformationTable">
+
+                            <tr class="no-bottom-border">
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Brand:</label>
+                                        <input type="text" class="viewForm-control-inline" id="idView" name="id" readonly>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Model:</label>
+                                        <input type="text" class="viewForm-control-inline" id="customerIdView" name="customerId" readonly>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Plate:</label>
+                                        <input type="text" class="viewForm-control-inline" id="customerIdView" name="customerId" readonly>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <tr class="no-bottom-border">
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Budget:</label>
+                                        <input type="text" class="viewForm-control-inline" id="idView" name="id" readonly>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Size:</label>
+                                        <input type="text" class="viewForm-control-inline" id="customerIdView" name="customerId" readonly>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <br>
+                                </td>
+
+                            </tr>
+
+                            <tr class="no-bottom-border">
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Cruisecontrol:</label>
+                                        <input type="text" class="viewForm-control-inline" id="idView" name="id" readonly>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Horsepower:</label>
+                                        <input type="text" class="viewForm-control-inline" id="customerIdView" name="customerId" readonly>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <br>
+                                </td>
+
+                            </tr>
+
+                            <tr class="no-bottom-border">
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Seat number:</label>
+                                        <input type="text" class="viewForm-control-inline" id="idView" name="id" readonly>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Seat material:</label>
+                                        <input type="text" class="viewForm-control-inline" id="customerIdView" name="customerId" readonly>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <br>
+                                </td>
+
+                            </tr>
+
+                            <tr class="no-bottom-border">
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline">Price pr. day:</label>
+                                        <input type="text" class="viewForm-control-inline" id="idView" name="id" readonly>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <br>
+                                </td>
+
+                                <td>
+                                    <br>
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                        <div class="viewModal-section_header">
+                            <h5 class="viewModal-section_header-title" id="viewModal-section_headerLabel4">Payment Information</h5>
                         </div>
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Motorhome ID:</label>
-                            <input type="text" class="viewForm-control" id="motorhomeIdView" name="motorhomeId" readonly>
+                        <table id="paymentInformationTable">
+
+                            <tr class="no-bottom-border">
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline-payment">Brand:</label>
+                                        <input type="text" class="viewForm-control-inline" id="idView" name="id" readonly>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="no-bottom-border">
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline-payment">Brand:</label>
+                                        <input type="text" class="viewForm-control-inline" id="idView" name="id" readonly>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="no-bottom-border">
+
+                                <td>
+                                    <div class="viewForm-group">
+                                        <label for="recipient-name" class="col-form-label-inline-payment">Brand:</label>
+                                        <input type="text" class="viewForm-control-inline" id="idView" name="id" readonly>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </table>
+
+                        <div class="viewModal-section_header">
+                            <h5 class="viewModal-section_header-title" id="viewModal-section_headerLabel5">Signatures</h5>
                         </div>
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Accessory ID:</label>
-                            <input type="text" class="viewForm-control" id="accessoryIdView" name="accessoryId" readonly>
-                        </div>
+                        <table id="signatures">
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Season:</label>
-                            <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="viewForm-control" id="seasonView" name="season" readonly>
-                        </div>
+                        <tr class="no-bottom-border">
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Start Date:</label>
-                            <input type="date" class="viewForm-control" id="fromDateView" name="fromDate" readonly>
-                        </div>
+                            <td>
+                                <a href="/rentalcontracts"> <img  class="company-signature" src="company-signature.png" alt="company-signature"> </a>
+                                <h5 class="viewModal-section_header-title" id="company-signature_Label">Company signature</h5>
+                            </td>
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">End Date:</label>
-                            <input type="date" class="viewForm-control" id="toDateView" name="toDate" readonly>
-                        </div>
+                            <td>
+                                <a href="/rentalcontracts"> <img  class="costumer-signature" src="company-signature.png" alt="costumer-signature"> </a>
+                                <h5 class="viewModal-section_header-title" id="costumer-signature_Label">Customer signature</h5>
+                            </td>
+                        </tr>
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Fuel:</label>
-                            <input type="number" class="viewForm-control"  id="fuelView" name="fuel" readonly>
-                        </div>
+                        </table>
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Extra Kilometers:</label>
-                            <input type="number" class="viewForm-control"  id="extraKmView" name="extraKm" readonly>
-                        </div>
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Pick up location:</label>
-                            <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="viewForm-control"  id="pickUpLocationView" name="pickUpLocation" readonly>
-                        </div>
 
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Drop off location:</label>
-                            <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="viewForm-control"  id="dropOffLocationView" name="dropOffLocation" readonly>
-                        </div>
-
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Rental price:</label>
-                            <input type="number" step="0.01" min="0.00" class="viewForm-control"  id="rentalPriceView" name="rentalPrice" readonly>
-                        </div>
-
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Post rental price:</label>
-                            <input type="number" step="0.01" min="0.00" class="viewForm-control"  id="postRentalPriceView" name="postRentalPrice" readonly>
-                        </div>
-
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Total Price:</label>
-                            <input type="number" step="0.01" min="0.00" class="viewForm-control"  id="totalPriceView" name="totalPrice" readonly>
-                        </div>
-
-                        <div class="viewForm-group">
-                            <label for="recipient-name" class="col-form-label">Status:</label>
-                            <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="viewForm-control"  id="statusView" name="status" readonly>
-                        </div>
-
-                    </div>
                     <div class="viewModal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
