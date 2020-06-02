@@ -21,18 +21,24 @@
     <body>
 
     <header>
-        <a href="/employees">
-            <img  class="logo" src="logo2.png" alt="logo">
+        <a href="/">
+            <h1 class = "title">NMH</h1>
+<!--            <img  class="logo" src="logo2.png" alt="logo">-->
         </a>
-
-        <h1 class = "title">NMH</h1>
 
         <form class="search-box" th:action="@{/employees}" method="get">
             <a href="#">
                 <button class="search-btn"><i class="fas fa-search"></i></button>
             </a>
-            <input class ="search-txt" type="text" name="keyword" placeholder="Type to search">
+            <input class ="search-txt" type="text" name="keyword" placeholder="Search by Name, Phone Nr. or CPR">
         </form>
+
+        <ul>
+            <li><a class="menu"  href="/rentalContracts">Contracts</a></li>
+            <li><a class="menu" href="/customers">Customers</a></li>
+            <li><a class="menu" href="/motorhomes">Motorhomes</a></li>
+            <li><a class="menu" href="/employees">Employees</a></li>
+        </ul>
 
 
         <div id="header-wrapper">
@@ -64,6 +70,7 @@
                     <th>Role</th>
                     <th>Hours/Week</th>
                     <th>Wage</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
 
@@ -93,10 +100,17 @@
         </div>
     </main>
 
-    <buttom>
-        <div id="buttom-wrapper">
+    <footer id="footer">
+        <br/>
+        <a href="/">
+            <h6 id="small-logo">NMH</h6>
+        </a>
+        <div id="footer-text">
+            Bianca, Cristian, Frederik, Gabriel
         </div>
-    </buttom>
+    </footer>
+
+
 
 
     <!-- add bootstrap modal -->
@@ -155,7 +169,7 @@
 
                         <div class="form-group">
                             <label for="recipient-cpr" class="col-form-label">CPR Number:</label>
-                            <input type="text" pattern="[0-9]{10}" oninvalid="this.setCustomValidity('Please fill out this field. The CPR is a 10-digit number')"
+                            <input type="text" pattern="[0-9]{6}-[0-9]{4}" oninvalid="this.setCustomValidity('Please fill out this field. The number has to follow the format: ddMMyy-xxxx')"
                                    oninput="this.setCustomValidity('')" class="form-control" id="recipient-cpr" name="cpr" required>
                         </div>
 
@@ -246,7 +260,7 @@
 
                         <div class="form-group">
                             <label class="col-form-label">CPR:</label>
-                            <input type="text" pattern="[0-9]{10}" oninvalid="this.setCustomValidity('Please fill out this field. The CPR is a 10-digit number')"
+                            <input type="text" pattern="[0-9]{6}-[0-9]{4}" oninvalid="this.setCustomValidity('Please fill out this field. The number has to follow the format: ddMMyy-xxxx')"
                                    oninput="this.setCustomValidity('')" class="form-control"  id="cprEdit" name="cpr" required>
                         </div>
 
