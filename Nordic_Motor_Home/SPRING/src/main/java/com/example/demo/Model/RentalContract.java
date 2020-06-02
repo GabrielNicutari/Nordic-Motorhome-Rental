@@ -32,17 +32,18 @@ public class RentalContract {
     private String plate;
     private String budget;
     private String size;
+    private String fuelType;
     private String cruiseControl;
     private int hp;
     private int seatNumber;
-    private String seatMaterial;
+    private String seatsMaterial;
     private double pricePerDay;
 
     //Fields we use from customer
     private String firstName;
     private String lastName;
     private String address;
-    private String zipCode;
+    private String zipCodeCustomer;
     private String city;
     private String phoneNumber;
     private String email;
@@ -53,10 +54,10 @@ public class RentalContract {
 
     public RentalContract(int id, int customerId, int motorhomeId, int accessoryId, String season, Date fromDate, Date toDate, String fuel,
                           double extraKm, int pickUpLocation, int dropOffLocation, double rentalPrice, double postRentalPrice,
-                          double totalPrice, String status, String brand, String model, String plate, String budget, String size, String cruiseControl,
-                          int hp, int seatNumber, String seatMaterial, double pricePerDay, String firstName, String lastName, String address,
-                          String zipCode, String city, String phoneNumber, String email, Date driverSinceDate, String driverLicenceNumber,
-                          String newPickUpLocation, String newDropOffLocation) {
+                          double totalPrice, String status, String brand, String model, String plate, String budget, String size, String fuelType,
+                          String cruiseControl, int hp, int seatNumber, String seatsMaterial, double pricePerDay, String firstName, String lastName,
+                          String address, String zipCodeCustomer, String city, String phoneNumber, String email, Date driverSinceDate,
+                          String driverLicenceNumber, String newPickUpLocation, String newDropOffLocation) {
         this.id = id;
         this.customerId = customerId;
         this.motorhomeId = motorhomeId;
@@ -78,16 +79,17 @@ public class RentalContract {
         this.plate = plate;
         this.budget = budget;
         this.size = size;
+        this.fuelType = fuelType;
         this.cruiseControl = cruiseControl;
         this.hp = hp;
         this.seatNumber = seatNumber;
-        this.seatMaterial = seatMaterial;
+        this.seatsMaterial = seatsMaterial;
         this.pricePerDay = pricePerDay;
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.zipCode = zipCode;
+        this.zipCodeCustomer = zipCodeCustomer;
         this.city = city;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -258,6 +260,14 @@ public class RentalContract {
         this.size = size;
     }
 
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
     public String getCruiseControl() {
         return cruiseControl;
     }
@@ -282,12 +292,12 @@ public class RentalContract {
         this.seatNumber = seatNumber;
     }
 
-    public String getSeatMaterial() {
-        return seatMaterial;
+    public String getSeatsMaterial() {
+        return seatsMaterial;
     }
 
-    public void setSeatMaterial(String seatMaterial) {
-        this.seatMaterial = seatMaterial;
+    public void setSeatsMaterial(String seatsMaterial) {
+        this.seatsMaterial = seatsMaterial;
     }
 
     public double getPricePerDay() {
@@ -322,12 +332,12 @@ public class RentalContract {
         this.address = address;
     }
 
-    public String getZipCode() {
-        return zipCode;
+    public String getZipCodeCustomer() {
+        return zipCodeCustomer;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void setZipCodeCustomer(String zipCodeCustomer) {
+        this.zipCodeCustomer = zipCodeCustomer;
     }
 
     public String getCity() {

@@ -193,9 +193,12 @@ public class RentalContractRepository {
     }
 
     public RentalContract findById(int id) {
-        String query = "SELECT rc.*, mh.plate, c.firstName, c.lastName, c.address, b.brand, m.model " +
-                "FROM rentalcontracts rc, motorhomes mh, brands b, models m, customers c " +
-                "WHERE rc.customerId = c.id AND rc.motorHomeId = mh.id AND mh.modelId = m.id AND m.brandId = b.id AND rc.id = ? ORDER BY rc.id";
+        String query = "SELECT rc.*, c.firstName, c.lastName, c.address, c.zipCodeCustomer, z.city, c.phoneNumber, c.email, c.driverLicenceNumber, " +
+                "c.driverSinceDate, b.brand, m.model,  mh.plate, m.budget, m.size, m.fuelType, mh.cruiseControl, mh.hp, mh.seatNumber, mh.seatsMaterial, " +
+                "mh.pricePerDay " +
+                "FROM rentalcontracts rc, motorhomes mh, brands b, models m, customers c, zip z " +
+                "WHERE rc.customerId = c.id AND rc.motorHomeId = mh.id AND mh.modelId = m.id AND m.brandId = b.id AND c.zipCodeCustomer = z.zipCode " +
+                "AND rc.id = ? ORDER BY rc.id";
 
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         return template.queryForObject(query, rowMapper, id);

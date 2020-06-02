@@ -87,20 +87,41 @@ $('document').ready(function() {
 
         $.get(href, function(rentalcontract, status) {
             $('#idView').val(rentalcontract.id);
+            $('#statusView').val(rentalcontract.status);
+            $('#fromDateView').val(rentalcontract.fromDate);
+            $('#toDateView').val(rentalcontract.toDate);
+            $('#seasonView').val(rentalcontract.season);
+            $('#newPickUpLocationView').val(rentalcontract.newPickUpLocation);
+            $('#newDropOffLocationView').val(rentalcontract.newDropOffLocation);
+            // $('#fuelView').val(rentalcontract.fuel);
+            // $('#extraKmView').val(rentalcontract.extraKm);
+
             $('#firstNameView').val(rentalcontract.firstName)
             $('#lastNameView').val(rentalcontract.lastName);
             $('#addressView').val(rentalcontract.address);
-            $('#seasonView').val(rentalcontract.season);
-            $('#fromDateView').val(rentalcontract.fromDate);
-            $('#toDateView').val(rentalcontract.toDate);
-            // $('#fuelView').val(rentalcontract.fuel);
-            // $('#extraKmView').val(rentalcontract.extraKm);
-            $('#newPickUpLocationView').val(rentalcontract.newPickUpLocation);
-            $('#newDropOffLocationView').val(rentalcontract.newDropOffLocation);
+            $('#zipCodeCustomerView').val(rentalcontract.zipCodeCustomer);
+            $('#cityView').val(rentalcontract.city);
+            $('#phoneNumberView').val(rentalcontract.phoneNumber);
+            $('#emailView').val(rentalcontract.email);
+            $('#driverLicenceNumberView').val(rentalcontract.driverLicenceNumber);
+            $('#driverSinceDateView').val(rentalcontract.driverSinceDate);
+
+            $('#brandView').val(rentalcontract.brand);
+            $('#modelView').val(rentalcontract.model);
+            $('#plateView').val(rentalcontract.plate);
+            $('#budgetView').val(rentalcontract.budget);
+            $('#sizeView').val(rentalcontract.size);
+            $('#fuelTypeView').val(rentalcontract.fuelType);
+            $('#cruiseControlView').val(rentalcontract.cruiseControl);
+            $('#hpView').val(rentalcontract.hp);
+            $('#seatNumberView').val(rentalcontract.seatNumber);
+            $('#seatsMaterialView').val(rentalcontract.seatsMaterial);
+            $('#pricePerDayView').val(rentalcontract.pricePerDay);
+
             $('#rentalPriceView').val(rentalcontract.rentalPrice);
             $('#postRentalPriceView').val(rentalcontract.postRentalPrice);
             $('#totalPriceView').val(rentalcontract.totalPrice);
-            $('#statusView').val(rentalcontract.status);
+
         });
 
         $('#viewModal').modal();
