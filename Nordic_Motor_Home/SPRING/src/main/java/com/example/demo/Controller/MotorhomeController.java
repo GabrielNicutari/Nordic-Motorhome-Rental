@@ -16,10 +16,10 @@ public class MotorhomeController {
     @Autowired
     private MotorhomeService motorhomeService;
 
-    @GetMapping("/")
-    public String index() {
-        return "home/motorhomes";
-    }
+//    @GetMapping("/")
+//    public String index() {
+//        return "home/motorhomes";
+//    }
 
     @GetMapping("/motorhomes")
     public String motorhomes(Model model, String keyword) {

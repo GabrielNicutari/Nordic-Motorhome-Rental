@@ -27,7 +27,7 @@ public class CustomerRepository {
     }
 
     public void add(Customer c) {
-        if(!doesZipCustomerExist(c.getZipCodeCustomer())) {
+        if(!doesZipExist(c.getZipCodeCustomer())) {
             String query1 = "INSERT INTO zip (zipCode, city)" +
                     "VALUES (?, ?)";
             template.update(query1, c.getZipCodeCustomer(), c.getCity());
@@ -46,7 +46,7 @@ public class CustomerRepository {
     }
 
     private boolean doesCityExist(String updatedCity, String zip) {
-        return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT city FROM zip " +
+        return template.queryForObject("SELECT EXISTS(SELECT city FROM zip " +
                 "WHERE city = \"" + updatedCity + "\")", Boolean.class);
     }
 
@@ -77,7 +77,7 @@ public class CustomerRepository {
 
     public void update(Customer c, int id) {
         //If zip code is new in the db, it has to be stored in the zip table
-        if(!doesZipCustomerExist(c.getZipCodeCustomer())) {
+        if(!doesZipExist(c.getZipCodeCustomer())) {
             String query1 = "INSERT INTO zip (zipCode, city) " +
                     "VALUES (?, ?)";
             template.update(query1, c.getZipCodeCustomer(), c.getCity());
@@ -87,8 +87,8 @@ public class CustomerRepository {
             template.update(query2, c.getCity(), c.getZipCodeCustomer());
         }
 
-        String query3 = "UPDATE customers SET firstName = ?, lastName = ?, address = ?, zipCodeCustomer = ?" +
-                    " phoneNumber = ?, email = ?, driverLicenceNumber = ?, driverSinceDate = ? WHERE id= ?";
+        String query3 = "UPDATE customers SET firstName = ?, lastName = ?, address = ?, zipCodeCustomer = ?," +
+                    "phoneNumber = ?, email = ?, driverLicenceNumber = ?, driverSinceDate = ? WHERE id= ?";
         template.update(query3, c.getFirstName(), c.getLastName(), c.getAddress(), c.getZipCodeCustomer(),
                 c.getPhoneNumber(), c.getEmail(), c.getDriverLicenceNumber(), c.getDriverSinceDate(), id);
     }
