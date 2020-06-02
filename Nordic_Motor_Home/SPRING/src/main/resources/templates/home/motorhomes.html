@@ -226,7 +226,7 @@
                             <label for="recipient-brand" class="col-form-label" >Brand:</label>
 <!--                            <input type="number" class="form-control" id="recipient-modelId" name="modelId" required>-->
                             <select id="recipient-brand" class="form-control" name="brand" required>
-                                <option th:each="brand: ${brands}" th:text="${brand.brand}"></option>
+                                <option th:each="brand: ${brands}" th:text="${brand.brand}" ></option>
                             </select>
                         </div>
 

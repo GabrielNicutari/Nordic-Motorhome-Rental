@@ -49,8 +49,6 @@
 
     </header>
 
-
-
     <main>
         <div id="page-wrapper">
 
@@ -64,25 +62,27 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Customer ID</th>
-                        <th>Motorhome ID</th>
-                        <th>Accessory ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Plate</th>
                         <th>Start Date</th>
                         <th>End Date</th>
-                        <th>Plate</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr th:each="rentalContract: ${rentalContracts}">
                         <td th:text="${rentalContract.id}"/>
-                        <td th:text="${rentalContract.customerId}"/>
-                        <td th:text="${rentalContract.motorhomeId}"/>
-                        <td th:text="${rentalContract.accessoryId}"/>
+                        <td th:text="${rentalContract.firstName}"/>
+                        <td th:text="${rentalContract.lastName}"/>
+                        <td th:text="${rentalContract.brand}"/>
+                        <td th:text="${rentalContract.model}"/>
+                        <td th:text="${rentalContract.plate}"/>
                         <td th:text="${rentalContract.fromDate}"/>
                         <td th:text="${rentalContract.toDate}"/>
-                        <td th:text="${rentalContract.plate}"/>
-
                         <td>
                             <div class="btn-group">
                                 <a th:href="@{/rentalContracts/getOne/(id=${rentalContract.id})}" class="btn-update editButton"><i class="fa fa-edit"></i></a>
@@ -175,7 +175,7 @@
 
                         <td>${data[i].id}</td>
                         <td>${data[i].customerId}</td>
-                        <td>${data[i].motorHomeId}</td>
+                        <td>${data[i].motorhomeId}</td>
                         <td>${data[i].accessoryId}</td>
                         <td>${data[i].season}</td>
                         <td>${data[i].fromDate}</td>
@@ -222,25 +222,54 @@
                             <input type="text" class="form-control" id="recipient-id" name="id">
                         </div-->
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Customer ID</label>
-                            <input type="text" class="form-control" id="recipient-customerId" name="customerId" required>
+                        <div class="form-group" >
+                            <label for="recipient-customerId" class="col-form-label" >Customer:</label>
+                            <!--                            <input type="number" class="form-control" id="recipient-modelId" name="modelId" required>-->
+                            <select id="recipient-customerId" class="form-control" name="customerId" required>
+                                <option class="dropdown-header" disabled >First Name & Last Name</option>
+                                <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.firstName} + ' ' + ${customer.lastName}" ></option>
+                            </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Motorhome ID</label>
-                            <input type="text" class="form-control" id="recipient-motorhomeId" name="motorhomeId" required>
+                        <div class="form-group" >
+                            <label for="recipient-motorhomeId" class="col-form-label" >Motorhome:</label>
+                            <select id="recipient-motorhomeId" class="form-control" name="motorhomeId" required>
+                                <option class="dropdown-header" disabled >Brand & Model - Plate - Price Per Day</option>
+                                <option th:each="motorhome: ${motorhomes}" th:value="${motorhome.id}" th:text="${motorhome.brand} + ' ' + ${motorhome.model} + ' - ' + ${motorhome.plate}
+                                + ' - ' + ${motorhome.pricePerDay} + ' DKK/day'"></option>
+                            </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Accessory ID</label>
-                            <input type="text" class="form-control" id="recipient-accessoryId" name="accessoryId" required>
+                        <div class="form-group" >
+                            <label for="recipient-accessoryId" class="col-form-label" >Accessory:</label>
+                            <select id="recipient-accessoryId" class="form-control" name="accessoryId" required>
+                                <option class="dropdown-header" disabled >Accessory - Price</option>
+                                <option th:each="accessory: ${accessories}" th:value="${accessory.id}" th:text="${accessory.accessory} + ' - ' +  ${accessory.price} + ' DKK'"></option>
+                            </select>
                         </div>
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Customer ID</label>-->
+<!--                            <input type="text" class="form-control" id="recipient-customerId" name="customerId" required>-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Motorhome ID</label>-->
+<!--                            <input type="text" class="form-control" id="recipient-motorhomeId" name="motorhomeId" required>-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Accessory ID</label>-->
+<!--                            <input type="text" class="form-control" id="recipient-accessoryId" name="accessoryId" required>-->
+<!--                        </div>-->
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Season</label>
-                            <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control" id="recipient-season" name="season" required>
+                            <select class="form-control" id="recipient-season" name="season" required>
+                                <option>Low</option>
+                                <option>Middle</option>
+                                <option>Peak</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -255,45 +284,46 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Fuel</label>
-                            <input type="number" class="form-control"  id="recipient-fuel" name="fuel" required>
+                            <input type="number" class="form-control" placeholder="100" value="100" name="fuel" readonly>
                         </div>
+<!--                        It should be 100 by default -->
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Extra Kilometers:</label>
-                            <input type="number" class="form-control"  id="recipient-extraKm" name="extraKm" required>
+                            <input type="number" class="form-control"  id="recipient-extraKm" name="extraKm" placeholder="0" required>
                         </div>
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Pick up location:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-pickUpLocation" name="pickUpLocation" required>
+                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-newPickUpLocation" name="newPickUpLocation" required>
                         </div>
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Drop off location:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-dropOffLocation" name="dropOffLocation" required>
+                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-newDropOffLocation" name="newDropOffLocation" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Rental Price:</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-rentalPrice" name="rentalPrice" required>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Rental Price:</label>-->
+<!--                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-rentalPrice" name="rentalPrice" required>-->
+<!--                        </div>-->
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Post rental price:</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-postRentalPrice" name="postRentalPrice" required>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Post rental price:</label>-->
+<!--                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-postRentalPrice" name="postRentalPrice" required>-->
+<!--                        </div>-->
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Total Price:</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-totalPrice" name="totalPrice" required>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="recipient-name" class="col-form-label">Total Price:</label>-->
+<!--                            <input type="number" step="0.01" min="0.00" class="form-control"  id="recipient-totalPrice" name="totalPrice" required>-->
+<!--                        </div>-->
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Status:</label>
                             <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-status" name="status" required>
+                                   oninput="this.setCustomValidity('')" class="form-control"  id="recipient-status" name="status" placeholder="Active" readonly>
                         </div>
 
                     </div>
