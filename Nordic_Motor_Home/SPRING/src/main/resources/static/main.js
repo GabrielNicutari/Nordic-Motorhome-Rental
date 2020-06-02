@@ -93,6 +93,8 @@ $('document').ready(function() {
             $('#seasonView').val(rentalcontract.season);
             $('#newPickUpLocationView').val(rentalcontract.newPickUpLocation);
             $('#newDropOffLocationView').val(rentalcontract.newDropOffLocation);
+            $('#accessoryView').val(rentalcontract.accessory);
+            $('#priceView').val(rentalcontract.price);
             // $('#fuelView').val(rentalcontract.fuel);
             // $('#extraKmView').val(rentalcontract.extraKm);
 

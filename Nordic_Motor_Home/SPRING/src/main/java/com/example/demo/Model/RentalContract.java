@@ -25,6 +25,8 @@ public class RentalContract {
     private double postRentalPrice;
     private double totalPrice;
     private String status;
+    private String accessory;
+    private double price; //for accessory
 
     //Fields we use from motorhome
     private String brand;
@@ -54,7 +56,7 @@ public class RentalContract {
 
     public RentalContract(int id, int customerId, int motorhomeId, int accessoryId, String season, Date fromDate, Date toDate, String fuel,
                           double extraKm, int pickUpLocation, int dropOffLocation, double rentalPrice, double postRentalPrice,
-                          double totalPrice, String status, String brand, String model, String plate, String budget, String size, String fuelType,
+                          double totalPrice, String status, String accessory, double price, String brand, String model, String plate, String budget, String size, String fuelType,
                           String cruiseControl, int hp, int seatNumber, String seatsMaterial, double pricePerDay, String firstName, String lastName,
                           String address, String zipCodeCustomer, String city, String phoneNumber, String email, Date driverSinceDate,
                           String driverLicenceNumber, String newPickUpLocation, String newDropOffLocation) {
@@ -73,6 +75,8 @@ public class RentalContract {
         this.postRentalPrice = postRentalPrice;
         this.totalPrice = totalPrice;
         this.status = status;
+        this.accessory = accessory;
+        this.price = price;
 
         this.brand = brand;
         this.model = model;
@@ -206,6 +210,22 @@ public class RentalContract {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getAccessory() {
+        return accessory;
+    }
+
+    public void setAccessory(String accessory) {
+        this.accessory = accessory;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setStatus(String status) {
