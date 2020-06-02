@@ -609,7 +609,7 @@ form.example button {
     -ms-flex-pack: end;
     justify-content: flex-end;
     padding: 1rem;
-    border-top: 1px solid 3;
+    border-top: 1px solid black;
     width: 100%;
     border-bottom-right-radius: 0.3rem;
     border-bottom-left-radius: 0.3rem;
@@ -652,7 +652,7 @@ form.example button {
     line-height: 1.5;
     color: #495057;
     background-color: lightgrey;
-    background-clip: text;
+    /*background-clip: ;*/
     border: 1px solid #FFFFFF;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -705,7 +705,7 @@ form.example button {
 .col-form-label {
     float: left;
     text-align: left !important;
-    color: black;
+    color: white;
 }
 
 table#policyInformationTable {
