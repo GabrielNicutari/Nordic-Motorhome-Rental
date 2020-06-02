@@ -56,9 +56,15 @@ public class RentalContract {
 
     public RentalContract(int id, int customerId, int motorhomeId, int accessoryId, String season, Date fromDate, Date toDate, int fuel,
                           double extraKm, int pickUpLocation, int dropOffLocation, double rentalPrice, double postRentalPrice,
+<<<<<<< refs/remotes/origin/master
                           double totalPrice, String status, String accessory, double price, String brand, String model, String plate, String budget, String size,
                           String fuelType, String cruiseControl, int hp, int seatNumber, String seatsMaterial, double pricePerDay, String firstName,
                           String lastName, String address, String zipCodeCustomer, String city, String phoneNumber, String email, Date driverSinceDate,
+=======
+                          double totalPrice, String status, String accessory, double price, String brand, String model, String plate, String budget, String size, String fuelType,
+                          String cruiseControl, int hp, int seatNumber, String seatsMaterial, double pricePerDay, String firstName, String lastName,
+                          String address, String zipCodeCustomer, String city, String phoneNumber, String email, Date driverSinceDate,
+>>>>>>> I forgot the accesory
                           String driverLicenceNumber, String newPickUpLocation, String newDropOffLocation) {
         this.id = id;
         this.customerId = customerId;
