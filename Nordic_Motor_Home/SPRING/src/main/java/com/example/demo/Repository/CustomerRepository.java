@@ -87,8 +87,8 @@ public class CustomerRepository {
         }
 
         String query3 = "UPDATE customers SET firstName = ?, lastName = ?, address = ?, zipCodeCustomer = ?," +
-                    "phoneNumber = ?, email = ?, driverLicenceNumber = ?, driverSinceDate = ? WHERE id= ?";
+                    "phoneNumber = ?, email = ?, driverLicenceNumber = ?, driverSinceDate = '" + c.getDriverSinceDate() + "' WHERE id= ?";
         template.update(query3, c.getFirstName(), c.getLastName(), c.getAddress(), c.getZipCodeCustomer(),
-                c.getPhoneNumber(), c.getEmail(), c.getDriverLicenceNumber(), c.getDriverSinceDate(), id);
+                c.getPhoneNumber(), c.getEmail(), c.getDriverLicenceNumber(), id);
     }
 } 

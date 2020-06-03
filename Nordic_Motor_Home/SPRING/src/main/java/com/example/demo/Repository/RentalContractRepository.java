@@ -180,7 +180,10 @@ public class RentalContractRepository {
     }
 
     public List<RentalContract> findByKeyWord(String keyword) {  //only plate now
-        String query = "SELECT * FROM rentalcontracts WHERE customerId LIKE '%" + keyword + "%'";
+        String query = "SELECT rc.*, c.firstName, c.lastName, b.brand, m.model, mh.plate FROM rentalcontracts rc, customers c, brands b, models m, motorhomes mh" +
+                " WHERE (c.firstName LIKE '%" + keyword + "%'" + " OR c.lastName LIKE '%" + keyword + "%' OR b.brand LIKE '%" + keyword + "%' " +
+                "OR m.model LIKE '%" + keyword + "%' OR mh.plate LIKE '%" + keyword + "%') AND rc.motorhomeId = mh.id AND rc.customerId = c.id AND mh.modelId = m.id " +
+                "AND m.brandId = b.id";
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         return template.query(query, rowMapper);
     }
@@ -232,10 +235,10 @@ public class RentalContractRepository {
 
         double totalPrice = rc.getRentalPrice() + postRentalPrice;
 
-        String query = "UPDATE rentalcontracts SET customerId = ?, motorhomeId = ?, accessoryId = ?, season = ?, fromDate = ?, toDate = ?, fuel = ?, extraKm = ?, pickUpLocation = ?, dropOffLocation = ?," +
+        String query = "UPDATE rentalcontracts SET customerId = ?, motorhomeId = ?, accessoryId = ?, season = ?, fromDate = '" + rc.getFromDate() + "', " +
+                "toDate = '" + rc.getToDate() + "', fuel = ?, extraKm = ?, pickUpLocation = ?, dropOffLocation = ?," +
                 "rentalprice = ?, postRentalPrice = ?, totalPrice = ?, status = ? WHERE id = ?";
-        template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), rc.getAccessoryId(), rc.getSeason(), rc.getFromDate(),
-                rc.getToDate(), rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), postRentalPrice,
+        template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), rc.getAccessoryId(), rc.getSeason(), rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), postRentalPrice,
                 totalPrice, rc.getStatus(), id);
     }
 

@@ -52,8 +52,9 @@ public class MotorhomeRepository {
         return template.update(query, id) < 0;
     }
 
-    public List<Motorhome> findByKeyWord(String keyword) {  //only plate now
-        String query = "SELECT * FROM motorhomes WHERE plate LIKE '%" + keyword + "%'";
+    public List<Motorhome> findByKeyWord(String keyword) {
+        String query = "SELECT mh.*, b.brand, m.model, m.budget, m.size, m.fuelType FROM motorhomes mh, brands b, models m WHERE (plate LIKE '%" + keyword + "%' " +
+                "OR b.brand LIKE '%" + keyword + "%' OR m.model LIKE '%" + keyword + "%') AND mh.modelId = m.id AND m.brandId = b.id";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(query, rowMapper);
     }
