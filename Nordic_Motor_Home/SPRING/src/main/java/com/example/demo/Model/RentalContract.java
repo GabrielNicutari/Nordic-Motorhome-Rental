@@ -15,7 +15,7 @@ public class RentalContract {
     private String season;
     private Date fromDate;
     private Date toDate;
-    private String fuel;
+    private int fuel;
     private double extraKm;
     private int pickUpLocation;
     private String newPickUpLocation;
@@ -54,11 +54,11 @@ public class RentalContract {
 
     public RentalContract() {}
 
-    public RentalContract(int id, int customerId, int motorhomeId, int accessoryId, String season, Date fromDate, Date toDate, String fuel,
+    public RentalContract(int id, int customerId, int motorhomeId, int accessoryId, String season, Date fromDate, Date toDate, int fuel,
                           double extraKm, int pickUpLocation, int dropOffLocation, double rentalPrice, double postRentalPrice,
-                          double totalPrice, String status, String accessory, double price, String brand, String model, String plate, String budget, String size, String fuelType,
-                          String cruiseControl, int hp, int seatNumber, String seatsMaterial, double pricePerDay, String firstName, String lastName,
-                          String address, String zipCodeCustomer, String city, String phoneNumber, String email, Date driverSinceDate,
+                          double totalPrice, String status, String accessory, double price, String brand, String model, String plate, String budget, String size,
+                          String fuelType, String cruiseControl, int hp, int seatNumber, String seatsMaterial, double pricePerDay, String firstName,
+                          String lastName, String address, String zipCodeCustomer, String city, String phoneNumber, String email, Date driverSinceDate,
                           String driverLicenceNumber, String newPickUpLocation, String newDropOffLocation) {
         this.id = id;
         this.customerId = customerId;
@@ -152,11 +152,11 @@ public class RentalContract {
         this.toDate = toDate;
     }
 
-    public String getFuel() {
+    public int getFuel() {
         return fuel;
     }
 
-    public void setFuel(String fuel) {
+    public void setFuel(int fuel) {
         this.fuel = fuel;
     }
 

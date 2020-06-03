@@ -29,7 +29,7 @@ $('document').ready(function() {
             $('#pricePerDayEdit').val(motorhome.pricePerDay);
             $('#availabilityEdit').val(motorhome.availability);
         });
-      
+
         $.get(href, function(employee, status) {
             $('#idEdit').val(employee.id);
             $('#firstNameEdit').val(employee.firstName);
@@ -45,6 +45,28 @@ $('document').ready(function() {
             $('#wageEdit').val(employee.wage);
         });
 
+        $.get(href, function(customer, status) {
+            $('#idEdit').val(customer.id);
+            $('#firstNameEdit').val(customer.firstName);
+            $('#lastNameEdit').val(customer.lastName);
+            $('#addressEdit').val(customer.address);
+            $('#zipCodeCustomerEdit').val(customer.zipCodeCustomer);
+            $('#cityEdit').val(customer.city);
+            $('#phoneNumberEdit').val(customer.phoneNumber);
+            $('#emailEdit').val(customer.email);
+            $('#driverSinceDateEdit').val(customer.driverSinceDate);
+            $('#driverLicenceNumberEdit').val(customer.driverLicenceNumber);
+        });
+        $('#editModal').modal();
+    });
+
+    $('.editButtonContracts').on('click',function(event) {      //created another button due to performance issues of using the same one for all 4 edits
+                                                            // getOne() was executed 4 time because $.get() had to be checked for every html (4 times) on every call
+
+        event.preventDefault();
+
+        var href = $(this).attr('href');
+
         $.get(href, function(rentalcontract, status) {
             $('#idEdit').val(rentalcontract.id);
             $('#customerIdEdit').val(rentalcontract.customerId);
@@ -55,25 +77,12 @@ $('document').ready(function() {
             $('#toDateEdit').val(rentalcontract.toDate);
             $('#fuelEdit').val(rentalcontract.fuel);
             $('#extraKmEdit').val(rentalcontract.extraKm);
-            $('#pickUpLocationEdit').val(rentalcontract.pickUpLocation);
-            $('#dropOffLocationEdit').val(rentalcontract.dropOffLocation);
+            $('#newPickUpLocationEdit').val(rentalcontract.newPickUpLocation);
+            $('#newDropOffLocationEdit').val(rentalcontract.newDropOffLocation);
             $('#rentalPriceEdit').val(rentalcontract.rentalPrice);
             $('#postRentalPriceEdit').val(rentalcontract.postRentalPrice);
             $('#totalPriceEdit').val(rentalcontract.totalPrice);
             $('#statusEdit').val(rentalcontract.status);
-        });
-          
-         $.get(href, function(customer, status) {
-                $('#idEdit').val(customer.id);
-                $('#firstNameEdit').val(customer.firstName);
-                $('#lastNameEdit').val(customer.lastName);
-                $('#addressEdit').val(customer.address);
-                $('#zipCodeCustomerEdit').val(customer.zipCodeCustomer);
-                $('#cityEdit').val(customer.city);
-                $('#phoneNumberEdit').val(customer.phoneNumber);
-                $('#emailEdit').val(customer.email);
-                $('#driverSinceDateEdit').val(customer.driverSinceDate);
-                $('#driverLicenceNumberEdit').val(customer.driverLicenceNumber);
         });
 
         $('#editModal').modal();

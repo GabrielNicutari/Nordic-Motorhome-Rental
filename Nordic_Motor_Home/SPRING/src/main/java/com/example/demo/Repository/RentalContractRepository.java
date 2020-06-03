@@ -12,6 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.text.DecimalFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Random;
 
@@ -121,11 +124,9 @@ public class RentalContractRepository {
                 break;
             case "Middle":
                 price = price + (price * 30) / 100;
-                System.out.println("Middle " + price);
                 break;
             case "Peak":
                 price = price + (price * 60) / 100;
-                System.out.println("Peak " + price);
                 break;
         }
         return price;
@@ -139,8 +140,6 @@ public class RentalContractRepository {
 
         boolean pickUpIsPriced = checkIfLocationIsPriced(rc.getPickUpLocation());
         boolean dropOffIsPriced = checkIfLocationIsPriced(rc.getDropOffLocation());
-        System.out.println(pickUpIsPriced);
-        System.out.println(dropOffIsPriced);
 
         double pricePerDay;
         double pickUpLocationPrice;
@@ -164,19 +163,13 @@ public class RentalContractRepository {
 
         accessoryPrice = findAccessoryPrice(rc);
 
-        System.out.println("Initial " + pricePerDay);
         pricePerDay = updatePriceBasedOnSeason(pricePerDay, rc);
-        System.out.println("After season update " + pricePerDay);
-        System.out.println("PickUp " + pickUpLocationPrice);
-        System.out.println("DropOff " + dropOffLocationPrice);
-        System.out.println("Accessory " + accessoryPrice);
 
         double price = pricePerDay * ((int) (toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + pickUpLocationPrice +
                 dropOffLocationPrice + accessoryPrice;
 
         DecimalFormat df = new DecimalFormat("#.##");
         price = Double.valueOf(df.format(price));
-        System.out.println("total " + price);
 
         return price;
     }
@@ -229,10 +222,100 @@ public class RentalContractRepository {
     }
 
     public void update(RentalContract rc, int id) {
+        checkLocation(rc, rc.getNewPickUpLocation(), "pick");
+        checkLocation(rc, rc.getNewDropOffLocation(), "drop");
+
+        double rentalPrice = calculateRentalPrice(rc);
+        rc.setRentalPrice(rentalPrice);
+
+        double postRentalPrice = calculatePostRentalPrice(rc);
+
+        double totalPrice = rc.getRentalPrice() + postRentalPrice;
+
         String query = "UPDATE rentalcontracts SET customerId = ?, motorhomeId = ?, accessoryId = ?, season = ?, fromDate = ?, toDate = ?, fuel = ?, extraKm = ?, pickUpLocation = ?, dropOffLocation = ?," +
                 "rentalprice = ?, postRentalPrice = ?, totalPrice = ?, status = ? WHERE id = ?";
         template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), rc.getAccessoryId(), rc.getSeason(), rc.getFromDate(),
-                rc.getToDate(), rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), rc.getPostRentalPrice(),
-                rc.getTotalPrice(), rc.getStatus(), id);
+                rc.getToDate(), rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), postRentalPrice,
+                totalPrice, rc.getStatus(), id);
+    }
+
+    private double calculatePostRentalPrice(RentalContract rc) {
+        String status = rc.getStatus();
+        double price = 0.0;
+
+        switch(status) {
+
+            case "Active":
+                //nothing happens, essentially
+                break;
+
+            case "Completed":
+                //check fuel (if below 50 - 500 DKK charge)
+                boolean underHalf = checkFuel(rc);
+                if(underHalf) {
+                    price = price + 500.00;
+                }
+
+                //check km driven - hypothetically; randomize whether the customer exceeded the limit or not then randomize by how much if that's the case
+                //7 dkk per kilometer
+                Random random = new Random();
+                boolean exceededLimit = random.nextBoolean();
+
+                if(exceededLimit) {
+                    int days = ((int) (rc.getToDate().getTime() - rc.getFromDate().getTime()) / (1000 * 60 * 60 * 24));
+                    int extraKm = 1 + random.nextInt((days * 100));
+                    rc.setExtraKm(extraKm);
+                    price = price + extraKm * 7;
+                }
+
+                //set availability of the car back to normal after a random amount of time (repairs)
+                break;
+
+            case "Cancelled":
+
+                //set postRentalPrice to new value
+                int days = calculateDaysBeforeCancellation(rc);
+
+                if(days > 50) {
+                    price = (2 * rc.getRentalPrice()) / 10;
+
+                    //it has to be a minimum of 1500
+                    if(price < 1500) {
+                        price = 1500;
+                    }
+
+                } else if(days < 50 && days >= 15) {
+                    price = rc.getRentalPrice() / 2;
+                } else if(days < 15 && days >= 1) {
+                    price = (8 * rc.getRentalPrice()) / 10;
+                } else {
+                    price = (9.5 * rc.getRentalPrice()) / 10;
+                }
+
+                //set rentalPrice to 0
+                rc.setRentalPrice(0);
+                break;
+        }
+        return price;
+    }
+
+    private boolean checkFuel(RentalContract rc) {
+        Random random = new Random();
+        int newFuel = 1 + random.nextInt(100);
+        rc.setFuel(newFuel);
+        return newFuel < 50;
+    }
+
+    private int calculateDaysBeforeCancellation(RentalContract rc) {
+        LocalDateTime now = LocalDateTime.now();
+        java.util.Date newNow = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
+
+        System.out.println(newNow);
+        System.out.println(rc.getFromDate());
+
+        int days = ((int) (rc.getFromDate().getTime() - newNow.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+
+        System.out.println("Days: " + days);
+        return days;
     }
 }

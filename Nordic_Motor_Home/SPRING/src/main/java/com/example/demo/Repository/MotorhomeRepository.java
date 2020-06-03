@@ -59,7 +59,7 @@ public class MotorhomeRepository {
     }
 
     public Motorhome findById(int id) {
-        String query = "SELECT * FROM motorhomes WHERE id = ?";
+        String query = "SELECT mh.*, b.brand, m.model FROM motorhomes mh, brands b, models m WHERE mh.modelId = m.id AND m.brandId = b.id AND mh.id = ?";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.queryForObject(query, rowMapper, id);
     }

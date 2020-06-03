@@ -5,8 +5,12 @@ body {
 }
 
 header {
-    background: #232222;
-    object-fit: cover;
+    background-image: url('exam_darker_smaller.png');
+    background-color: #2f3640;
+    margin-left: auto;
+    margin-right: auto;
+    background-position: center;
+    object-fit: fill;
     height: 130px;
     width: 100%;
     display: flex;
@@ -292,6 +296,8 @@ td, th, tr {
     display: inline-block;
     border: 2px solid #e05555;
     border-left: 1px!important;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
     width: 100%;
     overflow: hidden;
 }
@@ -331,8 +337,6 @@ td, th, tr {
     display: inline-block;
     border: 2px solid #e05555;
     border-left: 1px!important;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
     width: 100%;
     overflow: hidden;
 }
@@ -346,11 +350,9 @@ td, th, tr {
     left: 0%;
     width: 100%;
     height: 100%;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
     z-index: 0;
     transition: transform 0.5s;
-    transform-origin: 0 0;
+    transform-origin: 50% 0;
     transition-timing-function: cubic-bezier(0.5,1.6,0.4,0.7);
     transform: scaleX(0);
 }
