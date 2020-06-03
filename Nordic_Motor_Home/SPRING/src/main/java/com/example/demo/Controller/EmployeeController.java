@@ -18,26 +18,26 @@ public class EmployeeController {
     private EmployeeService employeeService;
     
     @GetMapping("/employees")
-    public String display(Model model, String keyword) {
-        List<Employee> employeeList = employeeService.fetchAll();
+    public String fetch(Model model, String keyword) {
+        List<Employee> employeeList = employeeService.fetch();
         model.addAttribute("employees", employeeList);
 
         if (keyword != null) {
             if(keyword.equals("")) {
                 return "redirect:/employees";
             } else {
-                model.addAttribute("employees", employeeService.findByKeyWord(keyword));
+                model.addAttribute("employees", employeeService.findByKeyword(keyword));
             }
         }
         else {
-            model.addAttribute("employees", employeeService.fetchAll());
+            model.addAttribute("employees", employeeService.fetch());
         }
         return "home/employees";
     }
 
 
     @PostMapping(value="/employees/add")
-    public String create(@ModelAttribute Employee employee) {
+    public String add(@ModelAttribute Employee employee) {
         employeeService.add(employee);
         return "redirect:/employees";
     }
@@ -58,7 +58,7 @@ public class EmployeeController {
 
     @RequestMapping(value="/employees/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String delete(int id) {
-        employeeService.deleteRow(id);
+        employeeService.delete(id);
         return "redirect:/employees";
     }
 }

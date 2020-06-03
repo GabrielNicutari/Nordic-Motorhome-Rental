@@ -21,19 +21,19 @@ public class CustomerController {
     }*/
 
     @GetMapping("/customers")
-    public String customers(Model model, String keyword) {
-        List<Customer> customerList = customerService.fetchAll();
+    public String fetch(Model model, String keyword) {
+        List<Customer> customerList = customerService.fetch();
         model.addAttribute("customers", customerList);
 
         if (keyword != null) {
             if(keyword.equals("")) {
                 return "redirect:/customers";
             } else {
-                model.addAttribute("customers", customerService.findByKeyWord(keyword));
+                model.addAttribute("customers", customerService.findByKeyword(keyword));
             }
         }
         else {
-            model.addAttribute("customers", customerService.fetchAll());
+            model.addAttribute("customers", customerService.fetch());
         }
         return "home/customers";
     }
@@ -53,7 +53,7 @@ public class CustomerController {
     @RequestMapping(value="/customers/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     //@GetMapping("/customers/delete/{id}")
     public String delete(int id) {
-        customerService.deleteRow(id);
+        customerService.delete(id);
         return "redirect:/customers";
     }
 

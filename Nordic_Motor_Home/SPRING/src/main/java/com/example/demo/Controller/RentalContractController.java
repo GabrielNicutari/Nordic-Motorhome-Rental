@@ -23,7 +23,7 @@ public class RentalContractController {
 //    }
 
     @GetMapping("/rentalContracts")
-    public String rentalContracts(Model model, String keyword) {
+    public String fetch(Model model, String keyword) {
         List<RentalContract> rentalContractsList = rentalContractService.fetchAll();
         List<Customer> customerList = rentalContractService.fetchCustomers();
         List<Motorhome> motorhomeList = rentalContractService.fetchMotorhomes();
@@ -38,7 +38,7 @@ public class RentalContractController {
             if(keyword.equals("")) {
                 return "redirect:/rentalContracts";
             } else {
-                model.addAttribute("rentalContracts", rentalContractService.findByKeyWord(keyword));
+                model.addAttribute("rentalContracts", rentalContractService.findByKeyword(keyword));
             }
         }
         else {
@@ -58,15 +58,15 @@ public class RentalContractController {
     }
 
     @PostMapping(value="/rentalContracts/add")
-    public String add(@ModelAttribute RentalContract g) {
-        rentalContractService.add(g);
+    public String add(@ModelAttribute RentalContract rentalContract) {
+        rentalContractService.add(rentalContract);
         return "redirect:/rentalContracts";
     }
 
     @RequestMapping(value="/rentalContracts/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     //@GetMapping("/rentalContracts/delete/{id}")
     public String delete(int id) {
-        rentalContractService.deleteRow(id);
+        rentalContractService.delete(id);
         return "redirect:/rentalContracts";
     }
 

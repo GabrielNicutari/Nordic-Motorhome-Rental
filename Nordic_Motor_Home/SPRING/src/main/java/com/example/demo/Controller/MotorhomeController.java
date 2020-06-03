@@ -22,7 +22,7 @@ public class MotorhomeController {
 //    }
 
     @GetMapping("/motorhomes")
-    public String motorhomes(Model model, String keyword) {
+    public String fetch(Model model, String keyword) {
         List<Motorhome> motorhomeList = motorhomeService.fetchAll();
         List<Brand> brandList = motorhomeService.fetchBrands();
         List<com.example.demo.Model.Model> modelList = motorhomeService.fetchModels();
@@ -34,7 +34,7 @@ public class MotorhomeController {
             if(keyword.equals("")) {
                 return "redirect:/motorhomes";
             } else {
-                model.addAttribute("motorhomes", motorhomeService.findByKeyWord(keyword));
+                model.addAttribute("motorhomes", motorhomeService.findByKeyword(keyword));
             }
         }
         else {
@@ -50,15 +50,15 @@ public class MotorhomeController {
     }
 
     @PostMapping(value="/motorhomes/add")
-    public String add(@ModelAttribute Motorhome g) {
-        motorhomeService.add(g);
+    public String add(@ModelAttribute Motorhome motorhome) {
+        motorhomeService.add(motorhome);
         return "redirect:/motorhomes";
     }
 
     @RequestMapping(value="/motorhomes/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     //@GetMapping("/motorhomes/delete/{id}")
     public String delete(int id) {
-        motorhomeService.deleteRow(id);
+        motorhomeService.delete(id);
         return "redirect:/motorhomes";
     }
 

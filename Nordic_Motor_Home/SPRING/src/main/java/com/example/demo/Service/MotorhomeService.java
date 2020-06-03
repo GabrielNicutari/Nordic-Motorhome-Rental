@@ -27,25 +27,25 @@ public class MotorhomeService {
         return motorhomeRepository.fetchModels();
     }
   
-    public void add(Motorhome g) {
-       motorhomeRepository.add(g);
+    public void add(Motorhome motorhome) {
+       motorhomeRepository.add(motorhome);
     }
 
     public Motorhome getOne(int id) {
         return motorhomeRepository.findById(id);
     }
 
-    public boolean deleteRow(int id) {
-        return motorhomeRepository.deleteRow(id);
+    public boolean delete(int id) {
+        return motorhomeRepository.delete(id);
     }
 
-    public void update(Motorhome g, int id) {
-        motorhomeRepository.update(g, id);
+    public void update(Motorhome motorhome, int id) {
+        motorhomeRepository.update(motorhome, id);
     }
 
     //Get motorhomes by keyword
-    public List<Motorhome> findByKeyWord(String keyword) {
-        return motorhomeRepository.findByKeyWord(keyword);
+    public List<Motorhome> findByKeyword(String keyword) {
+        return motorhomeRepository.findByKeyword(keyword);
     }
 
 

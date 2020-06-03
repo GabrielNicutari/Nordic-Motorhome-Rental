@@ -47,12 +47,12 @@ public class MotorhomeRepository {
                 mh.getCruiseControl(), mh.getPricePerDay(), mh.getAvailability());
     }
 
-    public Boolean deleteRow(int id) {
+    public Boolean delete(int id) {
         String query = "DELETE FROM motorhomes WHERE id = ?";
         return template.update(query, id) < 0;
     }
 
-    public List<Motorhome> findByKeyWord(String keyword) {
+    public List<Motorhome> findByKeyword(String keyword) {
         String query = "SELECT mh.*, b.brand, m.model, m.budget, m.size, m.fuelType FROM motorhomes mh, brands b, models m WHERE (plate LIKE '%" + keyword + "%' " +
                 "OR b.brand LIKE '%" + keyword + "%' OR m.model LIKE '%" + keyword + "%') AND mh.modelId = m.id AND m.brandId = b.id";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);

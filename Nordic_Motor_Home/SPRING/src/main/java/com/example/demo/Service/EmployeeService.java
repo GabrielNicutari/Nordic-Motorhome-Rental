@@ -15,12 +15,12 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public List<Employee> fetchAll() {
-        return employeeRepository.fetchAll();
+    public List<Employee> fetch() {
+        return employeeRepository.fetch();
     }
 
-    public List<Employee> findByKeyWord(String keyword) {
-        return employeeRepository.findByKeyWord(keyword);
+    public List<Employee> findByKeyword(String keyword) {
+        return employeeRepository.findByKeyword(keyword);
     }
 
 
@@ -38,8 +38,8 @@ public class EmployeeService {
     }
 
 
-    public void deleteRow(int id) {
-        employeeRepository.deleteRow(id);
+    public void delete(int id) {
+        employeeRepository.delete(id);
     }
 
 

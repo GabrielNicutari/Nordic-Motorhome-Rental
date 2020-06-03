@@ -32,16 +32,16 @@ public class RentalContractService {
         return rentalContractRepository.fetchAccessories();
     }
   
-    public void add(RentalContract g) {
-        rentalContractRepository.add(g);
+    public void add(RentalContract rentalContract) {
+        rentalContractRepository.add(rentalContract);
     }
 
     public RentalContract getOne(int id) {
         return rentalContractRepository.findById(id);
     }
 
-    public boolean deleteRow(int id) {
-        return rentalContractRepository.deleteRow(id);
+    public boolean delete(int id) {
+        return rentalContractRepository.delete(id);
     }
 
     public void update(RentalContract rc, int id) {
@@ -49,8 +49,8 @@ public class RentalContractService {
     }
 
     //Get rental Contract by keyword
-    public List<RentalContract> findByKeyWord(String keyword) {
-        return rentalContractRepository.findByKeyWord(keyword);
+    public List<RentalContract> findByKeyword(String keyword) {
+        return rentalContractRepository.findByKeyword(keyword);
     }
 
 

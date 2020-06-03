@@ -21,7 +21,7 @@ public class EmployeeRepository {
     JdbcTemplate template;
 
     //Display
-    public List<Employee> fetchAll() {
+    public List<Employee> fetch() {
         String query = "SELECT e.id, e.firstName, e.lastName, e.address, e.zipCodeEmployee, zip.city, e.phoneNumber, e.email, e.cpr, e.role, " +
                 "e.hoursPerWeek, e.wage " +
                 "FROM employees e " +
@@ -31,7 +31,7 @@ public class EmployeeRepository {
         return template.query(query, rowMapper);
     }
 
-    public List<Employee> findByKeyWord(String keyword) {  //only first name and last name
+    public List<Employee> findByKeyword(String keyword) {  //only first name and last name
         String query = "SELECT e.id, e.firstName, e.lastName, e.address, e.zipCodeEmployee, zip.city, e.phoneNumber, e.email, e.cpr, e.role," +
                 "e.hoursPerWeek, e.wage " +
                 " FROM employees e " +
@@ -59,11 +59,11 @@ public class EmployeeRepository {
     }
 
     @Autowired private JdbcTemplate jdbcTemplate;
-    private boolean doesZipEmployeeExist(String newZip) {
-        return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT zipCode FROM zip WHERE zipCode = \"" + newZip + "\")", Boolean.class);
+    private boolean doesZipEmployeeExist(String updatedZip) {
+        return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT zipCode FROM zip WHERE zipCode = \"" + updatedZip + "\")", Boolean.class);
     }
 
-    private boolean doesCityExist(String updatedCity, String zip) {
+    private boolean doesCityExist(String updatedCity) {
         return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT city FROM zip WHERE city = \"" + updatedCity + "\")", Boolean.class);
     }
 
@@ -76,7 +76,7 @@ public class EmployeeRepository {
                 template.update(query, employee.getZipCodeEmployee(), employee.getCity());
             }
 
-            if(!doesCityExist(employee.getCity(), employee.getZipCodeEmployee())) {
+            if(!doesCityExist(employee.getCity())) {
                 String query = "UPDATE zip SET city = ? WHERE zipCode = ?";
                 template.update(query, employee.getCity(), employee.getZipCodeEmployee());
             }
@@ -98,7 +98,7 @@ public class EmployeeRepository {
     }
 
     //Delete
-    public void deleteRow(int id) {
+    public void delete(int id) {
         String query = "DELETE FROM employees WHERE id = ?";
         template.update(query, id);
     }

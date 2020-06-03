@@ -174,12 +174,12 @@ public class RentalContractRepository {
         return price;
     }
 
-    public Boolean deleteRow(int id) {
+    public Boolean delete(int id) {
         String query = "DELETE FROM rentalcontracts WHERE id = ?";
         return template.update(query, id) < 0;
     }
 
-    public List<RentalContract> findByKeyWord(String keyword) {  //only plate now
+    public List<RentalContract> findByKeyword(String keyword) {  //only plate now
         String query = "SELECT rc.*, c.firstName, c.lastName, b.brand, m.model, mh.plate FROM rentalcontracts rc, customers c, brands b, models m, motorhomes mh" +
                 " WHERE (c.firstName LIKE '%" + keyword + "%'" + " OR c.lastName LIKE '%" + keyword + "%' OR b.brand LIKE '%" + keyword + "%' " +
                 "OR m.model LIKE '%" + keyword + "%' OR mh.plate LIKE '%" + keyword + "%') AND rc.motorhomeId = mh.id AND rc.customerId = c.id AND mh.modelId = m.id " +

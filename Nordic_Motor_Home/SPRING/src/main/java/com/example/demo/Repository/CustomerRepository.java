@@ -16,7 +16,7 @@ public class CustomerRepository {
     @Autowired
     JdbcTemplate template;
 
-    public List<Customer> fetchAll() {
+    public List<Customer> fetch() {
         String query = "SELECT c.id, c.firstName, c.lastName, c.address, c.zipCodeCustomer, z.city, c.phoneNumber," +
                 "c.email, c.driverSinceDate, c.driverLicenceNumber FROM customers c, zip z " +
                 "WHERE z.zipCode = c.zipCodeCustomer " +
@@ -39,23 +39,23 @@ public class CustomerRepository {
                 c.getDriverSinceDate(), c.getDriverLicenceNumber());
     }
   
-    private boolean doesZipExist(String newZip) { // checks if the zip already exists in the zip table
+    private boolean doesZipExist(String updatedZip) { // checks if the zip already exists in the zip table
         return template.queryForObject("SELECT EXISTS(SELECT zipCode FROM zip " +
-                "WHERE zipCode = \"" + newZip + "\")", Boolean.class);
+                "WHERE zipCode = \"" + updatedZip + "\")", Boolean.class);
     }
 
-    private boolean doesCityExist(String updatedCity, String zip) {
+    private boolean doesCityExist(String updatedCity) {
         return template.queryForObject("SELECT EXISTS(SELECT city FROM zip " +
                 "WHERE city = \"" + updatedCity + "\")", Boolean.class);
     }
 
-    public Boolean deleteRow(int id) {
+    public Boolean delete(int id) {
         String query = "DELETE FROM customers WHERE id = ?";
 
         return template.update(query, id) < 0;
     }
 
-    public List<Customer> findByKeyWord(String keyword) {
+    public List<Customer> findByKeyword(String keyword) {
         String query = "SELECT * FROM customers WHERE firstName LIKE '%" + keyword + "%' " +
                 "OR lastName LIKE '%" + keyword + "%' OR phoneNumber LIKE '%" + keyword + "%'";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
@@ -81,7 +81,7 @@ public class CustomerRepository {
                     "VALUES (?, ?)";
             template.update(query1, c.getZipCodeCustomer(), c.getCity());
         }
-        if(!doesCityExist(c.getCity(), c.getZipCodeCustomer())) {
+        if(!doesCityExist(c.getCity())) {
             String query2 = "UPDATE zip SET city = ? WHERE zipCode = ?";;
             template.update(query2, c.getCity(), c.getZipCodeCustomer());
         }

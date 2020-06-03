@@ -15,28 +15,28 @@ public class CustomerService {
 
     //List<Person> persons = new ArrayList<>();
 
-    public List<Customer> fetchAll() {
-        return customerRepository.fetchAll();
+    public List<Customer> fetch() {
+        return customerRepository.fetch();
     }
   
-    public void add(Customer c) {
-       customerRepository.add(c);
+    public void add(Customer customer) {
+       customerRepository.add(customer);
     }
 
     public Customer getOne(int id) {
         return customerRepository.findById(id);
     }
 
-    public boolean deleteRow(int id) {
-        return customerRepository.deleteRow(id);
+    public boolean delete(int id) {
+        return customerRepository.delete(id);
     }
 
-    public void update(Customer c, int id) {
-        customerRepository.update(c, id);
+    public void update(Customer customer, int id) {
+        customerRepository.update(customer, id);
     }
 
     //Get customers by keyword
-    public List<Customer> findByKeyWord(String keyword) {
-        return customerRepository.findByKeyWord(keyword);
+    public List<Customer> findByKeyword(String keyword) {
+        return customerRepository.findByKeyword(keyword);
     }
 }
