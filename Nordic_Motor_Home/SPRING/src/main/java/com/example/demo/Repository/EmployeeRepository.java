@@ -43,7 +43,7 @@ public class EmployeeRepository {
         return template.query(query, rowMapper);
     }
 
-    //Create
+    //Create employee
     public void add(Employee employee) {
 
         if(!doesZipEmployeeExist(employee.getZipCodeEmployee())) {

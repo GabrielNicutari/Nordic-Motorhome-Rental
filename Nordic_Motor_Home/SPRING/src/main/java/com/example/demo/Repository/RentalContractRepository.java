@@ -59,7 +59,8 @@ public class RentalContractRepository {
         rc.setTotalPrice(rentalPrice); //When a contract is created, we don't have postRentalPrice yet, hence the totalPrice will currently
         //be set to the initial RentalPrice
 
-        String query = "INSERT INTO rentalcontracts (customerId, motorhomeId, accessoryId, season, fromDate, toDate, fuel, extraKm, pickUpLocation, dropOffLocation, " +
+        String query = "INSERT INTO rentalcontracts (customerId, motorhomeId, accessoryId, season, fromDate, toDate, fuel, extraKm, " +
+                "pickUpLocation, dropOffLocation, " +
                 "rentalprice, postRentalPrice, totalPrice, status)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), rc.getAccessoryId(), rc.getSeason(), rc.getFromDate(),
@@ -238,7 +239,8 @@ public class RentalContractRepository {
         String query = "UPDATE rentalcontracts SET customerId = ?, motorhomeId = ?, accessoryId = ?, season = ?, fromDate = '" + rc.getFromDate() + "', " +
                 "toDate = '" + rc.getToDate() + "', fuel = ?, extraKm = ?, pickUpLocation = ?, dropOffLocation = ?," +
                 "rentalprice = ?, postRentalPrice = ?, totalPrice = ?, status = ? WHERE id = ?";
-        template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), rc.getAccessoryId(), rc.getSeason(), rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), postRentalPrice,
+        template.update(query, rc.getCustomerId(), rc.getMotorhomeId(), rc.getAccessoryId(), rc.getSeason(),
+                rc.getFuel(), rc.getExtraKm(), rc.getPickUpLocation(), rc.getDropOffLocation(), rc.getRentalPrice(), postRentalPrice,
                 totalPrice, rc.getStatus(), id);
     }
 

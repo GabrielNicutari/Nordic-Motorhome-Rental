@@ -10,4 +10,5 @@ public class HomeController {
     public static String index() {
         return "home/index";
     }
+
 }
