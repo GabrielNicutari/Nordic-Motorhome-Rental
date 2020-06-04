@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,7 +47,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
         }
 
         @Autowired
-        private UserDetailsService userDetailsService;
+        private MyUserDetailsService userDetailsService;
 
         @Bean
         public AuthenticationProvider authenticationProvider() {
