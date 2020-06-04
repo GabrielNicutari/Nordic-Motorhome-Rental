@@ -133,22 +133,30 @@ public class RentalContractRepository {
     }
 
     public double calculateRentalPrice(RentalContract rc) {
-        // price per day * (toDate - fromDate) + pickUpLocation price + dropOffLocation price + accessory price (take season into account
-        // as well)
         Date fromDate = rc.getFromDate();
         Date toDate = rc.getToDate();
 
+        //Look into the database and check if the location belongs to the default ones of the company
         boolean pickUpIsPriced = checkIfLocationIsPriced(rc.getPickUpLocation());
         boolean dropOffIsPriced = checkIfLocationIsPriced(rc.getDropOffLocation());
 
-        double pricePerDay;
+        double pricePerDay; //motorhome price per day
         double pickUpLocationPrice;
         double dropOffLocationPrice;
         double accessoryPrice;
 
+        //We find the pricePerDay of the motorhome in the database and then update it based on the season
+        //eg. pricePerDay = 500 DKK -> pricePerDay = 650 DKK (Season = Middle - 30% increase)
         pricePerDay = findPricePerDay(rc);
+        pricePerDay = updatePriceBasedOnSeason(pricePerDay, rc);
 
         Random random = new Random();
+
+        //If the pickUpLocation or the dropOffLocation is priced, then we assign a random price between 5 and 500 DKK
+        //(..assuming he wouldn't go over 100 km from one of the office locations (5 DKK per KM)
+
+        //We are trying to simulate a real-life situation, where you would know the exact distance between locations, which is
+        //why we randomise the values
         if(pickUpIsPriced) {
             pickUpLocationPrice = 5 + random.nextDouble() * (500.00 - 5.00);
         } else {
@@ -161,13 +169,15 @@ public class RentalContractRepository {
             dropOffLocationPrice = 0.00;
         }
 
+        //Find the accessory price in the database
         accessoryPrice = findAccessoryPrice(rc);
 
-        pricePerDay = updatePriceBasedOnSeason(pricePerDay, rc);
-
+        //The final calculation of the rentalPrice: pricePerDay * ('the amount of days between renting date and return date')
+        // + location prices + accessoryPrice
         double price = pricePerDay * ((int) (toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + pickUpLocationPrice +
                 dropOffLocationPrice + accessoryPrice;
 
+        //Set precision to 2 decimals
         DecimalFormat df = new DecimalFormat("#.##");
         price = Double.valueOf(df.format(price));
 
@@ -243,24 +253,31 @@ public class RentalContractRepository {
     }
 
     private double calculatePostRentalPrice(RentalContract rc) {
+        //We check the status of the contract in the database
         String status = rc.getStatus();
         double price = 0.0;
 
         switch(status) {
 
             case "Active":
-                //nothing happens, essentially
+                //Nothing happens, essentially. The postRentalPrice will be 0 in this case, as the customer didn't exceed
+                //any imposed limit
                 break;
 
             case "Completed":
-                //check fuel (if below 50 - 500 DKK charge)
+                //When the contract is completed, some of the values are automatically calculated,
+                //..thus setting the postRentalPrice
+
+                //Check fuel after customer returns the motorhome (if below 50% - 500 DKK charge)
                 boolean underHalf = checkFuel(rc);
                 if(underHalf) {
                     price = price + 500.00;
                 }
 
-                //check km driven - hypothetically; randomize whether the customer exceeded the limit or not then randomize by how much if that's the case
-                //7 dkk per kilometer
+                //Check KM driven - hypothetically; Simulate another real-life situation, in order for this value to be
+                //calculated automatically, without any user input;
+                //Randomise whether the customer exceeded the limit or not then randomize by how much if that's the case;
+                //7 DKK per extraKm
                 Random random = new Random();
                 boolean exceededLimit = random.nextBoolean();
 
@@ -271,12 +288,13 @@ public class RentalContractRepository {
                     price = price + extraKm * 7;
                 }
 
-                //set availability of the car back to normal after a random amount of time (repairs)
                 break;
 
             case "Cancelled":
+                //When the contract is cancelled, the postRentalPrice will be calculated accordingly,
+                //..replacing the initial rentalPrice
 
-                //set postRentalPrice to new value
+                //Calculate the amount of days between the current date and the day of the rental
                 int days = calculateDaysBeforeCancellation(rc);
 
                 if(days > 50) {
@@ -295,10 +313,11 @@ public class RentalContractRepository {
                     price = (9.5 * rc.getRentalPrice()) / 10;
                 }
 
-                //set rentalPrice to 0
+                //Set rentalPrice to 0
                 rc.setRentalPrice(0);
                 break;
         }
+        //postRentalPrice
         return price;
     }
 
