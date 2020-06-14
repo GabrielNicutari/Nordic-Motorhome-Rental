@@ -3,7 +3,6 @@ package com.example.demo.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,4 +21,11 @@ public class User {
     private String username;
     private String password;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
