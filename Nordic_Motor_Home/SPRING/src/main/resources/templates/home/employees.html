@@ -23,7 +23,6 @@
     <header>
         <a href="/">
             <h1 class = "title">NMH</h1>
-<!--            <img  class="logo" src="logo2.png" alt="logo">-->
         </a>
 
         <form class="search-box" th:action="@{/employees}" method="get">
@@ -131,19 +130,22 @@
 
                         <div class="form-group">
                             <label for="recipient-firstName" class="col-form-label">First Name:</label>
-                            <input type="text" pattern="[a-zA-Z\- ]+" oninvalid="this.setCustomValidity('Please fill out this field. You can only use letters and hyphens (-)')"
+                            <input type="text" pattern="[^;!@#$%&*()_+={}|:<>?,./`]+" oninvalid="this.setCustomValidity('Please fill out this field. ' +
+                             'The following characters are not allowed: [;!@#$%&*()_+={}|:<>?,./\'`]  ')"
                                    oninput="this.setCustomValidity('')" class="form-control" id="recipient-firstName" name="firstName" required>
                         </div>
 
                         <div class="form-group">
                             <label for="recipient-lastName" class="col-form-label">Last Name:</label>
-                            <input type="text" pattern="[a-zA-Z\- ]+" oninvalid="this.setCustomValidity('Please fill out this field. You can only use letters and hyphens (-)')"
+                            <input type="text" pattern="[^;!@#$%&*()_+={}|:<>?,./'`]+" oninvalid="this.setCustomValidity('Please fill out this field. ' +
+                             'The following characters are not allowed: [;!@#$%&*()_+={}|:<>?,./\'`]  ')"
                                    oninput="this.setCustomValidity('')" class="form-control" id="recipient-lastName" name="lastName" required>
                         </div>
 
                         <div class="form-group">
                             <label for="recipient-address" class="col-form-label">Address:</label>
-                            <input type="text" pattern="[a-zA-Z\d\-., ]+" oninvalid="this.setCustomValidity('Please fill out this field. You can only use: letters, digits and (.-,) ')"
+                            <input type="text" pattern="[^;!@#$%&*()_+={}|:<>?/`]+" oninvalid="this.setCustomValidity('Please fill out this field.' +
+                             ' The following characters are not allowed: [;!@#$%&*()_+={}|:<>?,./\'`]  ')"
                                    oninput="this.setCustomValidity('')" class="form-control" id="recipient-address" name="address" required>
                         </div>
 
@@ -155,7 +157,8 @@
 
                         <div class="form-group">
                             <label for="recipient-city" class="col-form-label">City:</label>
-                            <input type="text" pattern="[a-zA-Z\- ]+" oninvalid="this.setCustomValidity('Please fill out this field. You can only use letters and hyphens (-)')"
+                            <input type="text" pattern="[^;!@#$%&*()_+={}|:<>?/'`]+" oninvalid="this.setCustomValidity('Please fill out this field. ' +
+                             'The following characters are not allowed: [;!@#$%&*()_+={}|:<>?,./\'`]  ')"
                                    oninput="this.setCustomValidity('')" class="form-control" id="recipient-city" name="city" required>
                         </div>
 
@@ -172,13 +175,15 @@
 
                         <div class="form-group">
                             <label for="recipient-cpr" class="col-form-label">CPR Number:</label>
-                            <input type="text" pattern="[0-9]{6}-[0-9]{4}" oninvalid="this.setCustomValidity('Please fill out this field. The number has to follow the format: ddMMyy-xxxx')"
+                            <input type="text" pattern="[0-9]{6}-[0-9]{4}" oninvalid="this.setCustomValidity('Please fill out this field. ' +
+                             'The number has to follow the format: ddMMyy-xxxx')"
                                    oninput="this.setCustomValidity('')" class="form-control" id="recipient-cpr" name="cpr" required>
                         </div>
 
                         <div class="form-group">
                             <label for="recipient-role" class="col-form-label">Role:</label>
-                            <input type="text" pattern="[a-zA-Z\- ]+" oninvalid="this.setCustomValidity('Please fill out this field. You can only use letters and hyphens(-) ')"
+                            <input type="text" pattern="[a-zA-Z\- ]+" oninvalid="this.setCustomValidity('Please fill out this field. ' +
+                             'You can only use letters and hyphens(-). ')"
                                    oninput="this.setCustomValidity('')" class="form-control" id="recipient-role" name="role" required>
                         </div>
 
@@ -221,20 +226,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="recipient-firstName" pattern="[a-zA-Z\- ]+" oninvalid="this.setCustomValidity('Please fill out this field. You can only use letters and hyphens (-) ')"
-                                   oninput="this.setCustomValidity('')" class="col-form-label">First Name:</label>
-                            <input type="text"  class="form-control" id="firstNameEdit" name="firstName" required>
+                            <label for="recipient-firstName" class="col-form-label">First Name:</label>
+                            <input type="text" pattern="[^;!@#$%&*()_+{}|:<>?,./'`]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: [;!@#$%&*()_+{}|:<>?,./\'`]  ')"
+                                   oninput="this.setCustomValidity('')" class="form-control" id="firstNameEdit" name="firstName" required>
                         </div>
 
                         <div class="form-group">
-                            <label pattern="[a-zA-Z\- ]+" oninvalid="this.setCustomValidity('Please fill out this field. You can only use letters and hyphens (-)  ')"
-                                   oninput="this.setCustomValidity('')" class="col-form-label">Last Name:</label>
-                            <input type="text" class="form-control" id="lastNameEdit" name="lastName" required>
+                            <label  class="col-form-label">Last Name:</label>
+                            <input type="text" pattern="[^;!@#$%&*()_+={}|:<>?,./'`]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: [;!@#$%&*()_+={}|:<>?,./\'`]  ')"
+                                   oninput="this.setCustomValidity('')" class="form-control" id="lastNameEdit" name="lastName" required>
                         </div>
 
                         <div class="form-group">
                             <label class="col-form-label">Address:</label>
-                            <input type="text" pattern="[a-zA-Z\d\-., ]+" oninvalid="this.setCustomValidity('Please fill out this field. You can only use: letters, digits and (.-,) ')"
+                            <input type="text" pattern="[^;!@#$%&*()_+={}|:<>?/`]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: [;!@#$%&*()_+={}|:<>?/`]')"
                                    oninput="this.setCustomValidity('')" class="form-control" id="addressEdit" name="address" required>
                         </div>
 
@@ -246,7 +251,7 @@
 
                         <div class="form-group">
                             <label class="col-form-label">City:</label>
-                            <input type="text" pattern="[a-zA-Z\- ]+" oninvalid="this.setCustomValidity('Please fill out this field. You can only use letters and hyphens (-) ')"
+                            <input type="text" pattern="[^;!@#$%&*()_+={}|:<>?/'`]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: [;!@#$%&*()_+={}|:<>?/\'`]\'  ')"
                                    oninput="this.setCustomValidity('')" class="form-control"  id="cityEdit" name="city" required>
                         </div>
 

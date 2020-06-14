@@ -141,7 +141,7 @@ a.menu:hover {
     max-height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden;
+    overflow: auto;
     display: flex;
     justify-content: center;
     align-items: center;
