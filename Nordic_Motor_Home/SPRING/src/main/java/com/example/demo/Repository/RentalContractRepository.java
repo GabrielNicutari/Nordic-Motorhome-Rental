@@ -38,7 +38,13 @@ public class RentalContractRepository {
         return template.query(query, rowMapper);
     }
 
-    public List<Motorhome> fetchMotorhomes() {
+    public List<Motorhome> fetchMotorhomesCreate() {
+        String query = "SELECT mh.*, m.model, b.brand FROM models m, brands b, motorhomes mh WHERE mh.modelId = m.id AND m.brandId = b.id AND mh.availability = 'YES'";
+        RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
+        return template.query(query, rowMapper);
+    }
+
+    public List<Motorhome> fetchMotorhomesUpdate() {
         String query = "SELECT mh.*, m.model, b.brand FROM models m, brands b, motorhomes mh WHERE mh.modelId = m.id AND m.brandId = b.id";
         RowMapper<Motorhome> rowMapper = new BeanPropertyRowMapper<>(Motorhome.class);
         return template.query(query, rowMapper);
@@ -59,6 +65,8 @@ public class RentalContractRepository {
         rc.setTotalPrice(rentalPrice); //When a contract is created, we don't have postRentalPrice yet, hence the totalPrice will currently
         //be set to the initial RentalPrice
 
+        changeMotorhomeAvailability(rc.getMotorhomeId(), "No"); //When a motorhome is rented, it should not be rentable up until the contract finishes
+
         String query = "INSERT INTO rentalcontracts (customerId, motorhomeId, accessoryId, season, fromDate, toDate, fuel, extraKm, " +
                 "pickUpLocation, dropOffLocation, " +
                 "rentalprice, postRentalPrice, totalPrice, status)" +
@@ -76,7 +84,7 @@ public class RentalContractRepository {
             locationId = findLocationId(newLocation);
             if(flag.equals("pick")) {
                 rc.setPickUpLocation(locationId);
-            } else {
+            } else {    //else it's "drop"
                 rc.setDropOffLocation(locationId);
             }
 
@@ -290,6 +298,8 @@ public class RentalContractRepository {
                     price = price + extraKm * 7;
                 }
 
+                changeMotorhomeAvailability(rc.getMotorhomeId(), "Yes"); //When the contract is completed, the motorhome is available for rent again
+
                 break;
 
             case "Cancelled":
@@ -317,6 +327,9 @@ public class RentalContractRepository {
 
                 //Set rentalPrice to 0
                 rc.setRentalPrice(0);
+
+                changeMotorhomeAvailability(rc.getMotorhomeId(), "Yes"); //When the contract is cancelled, the motorhome is available for rent again
+
                 break;
         }
         //postRentalPrice
@@ -341,5 +354,10 @@ public class RentalContractRepository {
 
         System.out.println("Days: " + days);
         return days;
+    }
+
+    private void changeMotorhomeAvailability(int id, String availability) {
+        String query = "UPDATE motorhomes SET availability = ? WHERE id = ?";
+        template.update(query, availability, id);
     }
 }

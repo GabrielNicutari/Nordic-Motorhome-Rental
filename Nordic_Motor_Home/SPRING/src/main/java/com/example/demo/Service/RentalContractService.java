@@ -24,8 +24,12 @@ public class RentalContractService {
         return rentalContractRepository.fetchCustomers();
     }
 
-    public List<Motorhome> fetchMotorhomes() {
-        return rentalContractRepository.fetchMotorhomes();
+    public List<Motorhome> fetchMotorhomesCreate() {
+        return rentalContractRepository.fetchMotorhomesCreate();
+    }
+
+    public List<Motorhome> fetchMotorhomesUpdate() {
+        return rentalContractRepository.fetchMotorhomesUpdate();
     }
 
     public List<Accessory> fetchAccessories() {

@@ -20,7 +20,7 @@ public class CustomerService {
     }
   
     public void add(Customer customer) {
-       customerRepository.add(customer);
+        customerRepository.add(customer);
     }
 
     public Customer getOne(int id) {

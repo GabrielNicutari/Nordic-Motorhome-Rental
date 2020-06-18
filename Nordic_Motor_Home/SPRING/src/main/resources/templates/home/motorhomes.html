@@ -275,8 +275,11 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Cruise Control:</label>
-                            <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control" id="recipient-cruiseControl" name="cruiseControl" required>
+
+                            <select class="form-control" id="recipient-cruiseControl" name="cruiseControl" required>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -286,8 +289,8 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Availability:</label>
-                            <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                   oninput="this.setCustomValidity('')" class="form-control" id="recipient-availability" name="availability" required>
+                            <input type="text" pattern="[^;]+" value="Yes" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
+                                   oninput="this.setCustomValidity('')" class="form-control" id="recipient-availability" name="availability" required readonly>
                         </div>
 
                     </div>
@@ -357,8 +360,10 @@
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Cruise Control:</label>
-                                <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                       oninput="this.setCustomValidity('')" class="form-control"  id="cruiseControlEdit" name="cruiseControl" required>
+                                <select class="form-control" id="cruiseControlEdit" name="cruiseControl" required>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
@@ -368,8 +373,12 @@
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Availability:</label>
-                                <input type="text" pattern="[^;]+" oninvalid="this.setCustomValidity('Please fill out this field. The following characters are not allowed: \' ; \' ')"
-                                       oninput="this.setCustomValidity('')" class="form-control"  id="availabilityEdit" name="availability" required>
+
+                                <select class="form-control" id="availabilityEdit" name="availability" required>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+
                             </div>
 
                         </div>

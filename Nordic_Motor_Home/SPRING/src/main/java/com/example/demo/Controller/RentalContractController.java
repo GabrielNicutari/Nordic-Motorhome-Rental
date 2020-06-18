@@ -26,12 +26,14 @@ public class RentalContractController {
     public String fetch(Model model, String keyword) {
         List<RentalContract> rentalContractsList = rentalContractService.fetchAll();
         List<Customer> customerList = rentalContractService.fetchCustomers();
-        List<Motorhome> motorhomeList = rentalContractService.fetchMotorhomes();
+        List<Motorhome> motorhomeListCreate = rentalContractService.fetchMotorhomesCreate();
+        List<Motorhome> motorhomeListUpdate = rentalContractService.fetchMotorhomesUpdate();
         List<Accessory> accessoryList = rentalContractService.fetchAccessories();
 
         model.addAttribute("rentalContracts", rentalContractsList);
         model.addAttribute("customers", customerList);
-        model.addAttribute("motorhomes", motorhomeList);
+        model.addAttribute("motorhomesCreate", motorhomeListCreate);
+        model.addAttribute("motorhomesUpdate", motorhomeListUpdate);
         model.addAttribute("accessories", accessoryList);
 
         if (keyword != null) {
